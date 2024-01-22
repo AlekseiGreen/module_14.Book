@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap');
+
+header {
+  border: 2px solid red;
+  height: 116px;
+}
+
+.siteHeader {
+  border: 2px solid green;
+  width: 1120px;
+  height: 116px;
+  margin: auto;
+  
+  position: relative;
+
+}
+
+.logo {
+  position: absolute;
+  left: 0px;
+  top: 47px;
+
+  color: var(--text-black, #1C2A39);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+
+  cursor: pointer;
+}
+
+.header-books {
+  position: absolute;
+  left: 371px;
+  top: 56px;
+
+  color: var(--text-black, #1C2A39);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+  text-transform: uppercase;
+
+  cursor: pointer;
+}
+
+.header-audiobooks {
+  position: absolute;
+  left: 450px;
+  top: 56px;
+
+  color: var(--text-gray, #5C6A79);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+
+  cursor: pointer;
+}
+
+.header-Stationery {
+  position: absolute;
+  left: 564px;
+  top: 56px;
+
+  color: var(--text-gray, #5C6A79);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+
+  cursor: pointer;
+}
+
+.header-blog {
+  position: absolute;
+  left: 713px;;
+  top: 56px;
+
+  color: var(--text-gray, #5C6A79);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+
+  cursor: pointer;
+}
+
+.header-img-icons {
+  position: absolute;
+  left: 995px;
+  top: 53px;
+}
+
+main {
+    border: 2px solid blue;
+}
+
+.main-section-banner {
+  /* border: 2px solid blue; */
+  min-height: 800px;
+}
+
+.banner-img {
+  margin: auto;
+  border: 2px solid green;
+  width: 1120px;
+  height: 702px;
+}
+
+.main-section-banner-slider {
+  border: 2px solid red;
+}
+
+.main-section-banner-dots {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin: auto;
+  margin-top: 17px;
+  border: 2px solid green;
+  width: 56px;
+  height: 12px;
+}
+
+.banner-img-dot1 {
+  cursor: pointer;
+}
+.banner-img-dot2 {
+  cursor: pointer;
+}
+.banner-img-dot3 {
+  cursor: pointer;
+}
