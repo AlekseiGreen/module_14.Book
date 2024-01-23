@@ -80,7 +80,7 @@ header {
 
 .header-blog {
   position: absolute;
-  left: 713px;;
+  left: 713px;
   top: 56px;
 
   color: var(--text-gray, #5C6A79);
@@ -106,7 +106,27 @@ main {
 
 .main-section-banner {
   /* border: 2px solid blue; */
-  min-height: 800px;
+  min-height: 807px;
+}
+
+.main-section-banner__box-one {
+  width: 149px;
+  height: 204px;
+  background-color: #9E98DC;
+
+  position: absolute;
+  right: -87px;
+  top: 198px;
+}
+
+.main-section-banner__box-two {
+  width: 137px;
+  height: 273px;
+  background-color: #FF8FE6;
+
+  position: absolute;
+  right: -158px;
+  top: 478px;
 }
 
 .banner-img {
@@ -114,6 +134,8 @@ main {
   border: 2px solid green;
   width: 1120px;
   height: 702px;
+
+  
 }
 
 .main-section-banner-slider {
@@ -140,4 +162,11 @@ main {
 }
 .banner-img-dot3 {
   cursor: pointer;
+}
+
+
+
+
+.main-section-book {
+  border: 2px solid black;
 }
