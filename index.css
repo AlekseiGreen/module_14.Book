@@ -215,4 +215,19 @@ main {
 
 .main-section-book {
   border: 2px solid black;
+  width: 1120px;
+  height: 1000px;
+  margin: auto;
+  position: relative;
+}
+
+.main-section-book__title {
+  border: 2px solid red;
+  width: 416px;
+  height: 710px;
+  flex-shrink: 0;
+  background: #EFEEF6;
+
+  position: absolute;
+  left: -160px;
 }
