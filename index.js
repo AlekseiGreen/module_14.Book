@@ -66,4 +66,3 @@ function changeImg(number) {
     }
 
 }
-
