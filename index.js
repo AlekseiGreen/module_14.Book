@@ -66,3 +66,11 @@ function changeImg(number) {
     }
 
 }
+
+const category = ['Bestsellers', 'Art & Fashion'];
+
+const list_categories = document.querySelector(".main-section-book__title");
+list_categories.innerHTML = `
+<div>`+ category[0] +`</div>
+<div>`+ category[1] +`</div>
+`;
