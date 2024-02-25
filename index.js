@@ -67,10 +67,24 @@ function changeImg(number) {
 
 }
 
-const category = ['Bestsellers', 'Art & Fashion'];
+const category = ['Bestsellers', 'Art & Fashion', 'Biography', 'Business', 'Children\'s', 'Education', 'Fiction & Poetry', 'Education', 'Filmm, TV & Drama', 'Food & Drink'];
 
 const list_categories = document.querySelector(".main-section-book__title");
 list_categories.innerHTML = `
-<div>`+ category[0] +`</div>
-<div>`+ category[1] +`</div>
+    <div onclick="openTitle_0()">`+ category[0] +`</div>
+    <div>`+ category[1] +`</div>
+    <div>`+ category[2] +`</div>
+    <div>`+ category[3] +`</div>
+    <div>`+ category[4] +`</div>
+    <div>`+ category[5] +`</div>
+    <div>`+ category[6] +`</div>
+    <div>`+ category[7] +`</div>
+    <div>`+ category[8] +`</div>
+    <div>`+ category[9] +`</div>
 `;
+
+function openTitle_0() {
+    let vv = 
+    5;
+    alert(vv);
+};
