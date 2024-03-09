@@ -67,24 +67,22 @@ function changeImg(number) {
 
 }
 
-const category = ['Bestsellers', 'Art & Fashion', 'Biography', 'Business', 'Children\'s', 'Education', 'Fiction & Poetry', 'Education', 'Filmm, TV & Drama', 'Food & Drink'];
+const category = ['Architecture', 'Art & Fashion', 'Biography', 'Business', 'Crafts & Hobbies', 'Drama', 'Fiction', 'Food & Drink', 'Health & Wellbeing', 'History & Politics', 'Humor', 'Poetry', 'Psychology', 'Sience', 'Technology', 'Travel & Maps'];
 
-const list_categories = document.querySelector(".main-section-book__title");
-list_categories.innerHTML = `
-    <div onclick="openTitle_0()">`+ category[0] +`</div>
-    <div>`+ category[1] +`</div>
-    <div>`+ category[2] +`</div>
-    <div>`+ category[3] +`</div>
-    <div>`+ category[4] +`</div>
-    <div>`+ category[5] +`</div>
-    <div>`+ category[6] +`</div>
-    <div>`+ category[7] +`</div>
-    <div>`+ category[8] +`</div>
-    <div>`+ category[9] +`</div>
-`;
+const list_categories = document.querySelector(".main-section-book-box__title");
 
-function openTitle_0() {
-    let vv = 
-    5;
-    alert(vv);
-};
+let j;
+function categoryList(categoryIntro) {
+    if(j === undefined) j = 0;
+    let stroka = "";
+    for(let i=0; i<categoryIntro.length; i++){
+        stroka = stroka + `${i===j? '<div class="main-section-book-box__title-category-active-ellipse"></div>':''}` + `<div class="main-section-book-box__title-category ${i === j ? "main-section-book-box__title-category-active": ""} " onclick="clickCategory(${i})">${categoryIntro[i]}</div>`;
+    }
+    return stroka;
+}
+list_categories.innerHTML =  categoryList(category);
+
+function clickCategory(i) {
+    j = i;
+    list_categories.innerHTML =  categoryList(category);
+}

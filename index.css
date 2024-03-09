@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&display=swap');
 
 header {
   border: 2px solid red;
@@ -215,19 +215,66 @@ main {
 
 .main-section-book {
   border: 2px solid black;
-  width: 1120px;
+  width: 1440px;
   height: 1000px;
   margin: auto;
   position: relative;
 }
 
-.main-section-book__title {
-  border: 2px solid red;
+.main-section-book-box {
+  border: 2px solid yellow;
   width: 416px;
   height: 710px;
+
+  background: #EFEEF6;
+
+  position: relative;
+}
+
+.main-section-book-box__title {
+  border: 2px solid red;
   flex-shrink: 0;
   background: #EFEEF6;
 
   position: absolute;
-  left: -160px;
+  
+  top: 45px;
+  left: 160px;
+}
+
+.main-section-book-box__title-category{
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14.63px;
+  color: #5C6A79;
+
+  margin-bottom: 23px;
+  
+}
+
+.main-section-book-box__title-category-active{
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: 0em;
+  color: #1C2A39;
+
+  text-align: left;
+
+
+}
+
+.main-section-book-box__title-category-active-ellipse{
+  width: 6px;
+  height: 6px;
+
+  background: #756AD3;
+  border-radius: 50%;
+
+  position: relative;
+  
+  top: 13px;
+  left: -14px;
 }
