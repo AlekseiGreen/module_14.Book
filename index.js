@@ -74,11 +74,13 @@ const list_categories = document.querySelector(".main-section-book-box__title");
 let j;
 function categoryList(categoryIntro) {
     if(j === undefined) j = 0;
-    let stroka = "";
+    let categoryListHTML = "";
     for(let i=0; i<categoryIntro.length; i++){
-        stroka = stroka + `${i===j? '<div class="main-section-book-box__title-category-active-ellipse"></div>':''}` + `<div class="main-section-book-box__title-category ${i === j ? "main-section-book-box__title-category-active": ""} " onclick="clickCategory(${i})">${categoryIntro[i]}</div>`;
+        let catalogDotActive = `${i===j? '<div class="main-section-book-box__title-category-active-ellipse"></div>':''}`;
+        let catalogActive = `<div class="main-section-book-box__title-category ${i === j ? "main-section-book-box__title-category-active": ""} " onclick="clickCategory(${i})">${categoryIntro[i]}</div>`;
+        categoryListHTML = categoryListHTML + catalogDotActive + catalogActive;
     }
-    return stroka;
+    return categoryListHTML;
 }
 list_categories.innerHTML =  categoryList(category);
 
