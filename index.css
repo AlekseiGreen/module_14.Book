@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
 
 header {
   border: 2px solid red;
@@ -102,6 +104,7 @@ header {
 
 main {
     border: 2px solid blue;
+    
 }
 
 .main-section-banner {
@@ -216,7 +219,7 @@ main {
 .main-section-book {
   border: 2px solid black;
   width: 1440px;
-  height: 1000px;
+  height: 1275px;
   margin: auto;
   position: relative;
 }
@@ -228,7 +231,7 @@ main {
 
   background: #EFEEF6;
 
-  position: relative;
+  position: absolute;
 }
 
 .main-section-book-box__title {
@@ -240,6 +243,7 @@ main {
   
   top: 45px;
   left: 160px;
+  
 }
 
 .main-section-book-box__title-category{
@@ -250,7 +254,7 @@ main {
   color: #5C6A79;
 
   margin-bottom: 23px;
-  
+  cursor: pointer;
 }
 
 .main-section-book-box__title-category-active{
@@ -262,7 +266,6 @@ main {
   color: #1C2A39;
 
   text-align: left;
-
 
 }
 
@@ -277,4 +280,200 @@ main {
   
   top: 13px;
   left: -14px;
+}
+
+.main-section-book-shop {
+  border: 2px solid black;
+  width: 924px;
+  /* height: 1233px; */
+  position: absolute;
+
+  top: 46px;
+  right: 160px;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  row-gap: 91px;
+}
+
+.main-section-book-shop__more {
+  border: 2px solid green;
+  width: 424px;
+  height: 300px;
+  /* position: absolute; */
+  /* background-color: white; */
+}
+
+
+.main-section-book-shop-button {
+  box-sizing: border-box;
+  border: 1px solid rgb(76, 61, 178);
+
+  width: 176px;
+  height: 45px;
+  margin: auto;
+
+  text-align: center;
+  color: rgb(76, 61, 178);
+  font-family: Montserrat;
+  font-size: 8px;
+  font-weight: 700;
+  line-height: 550%;
+  letter-spacing: 0%;
+  /* text-align: left; */
+  text-transform: uppercase;
+
+  cursor: pointer;
+}
+
+.main-section-book-shop-cover {
+  /* background-color: rgb(); */
+  
+  width: 212px;
+  height: 300px;
+
+  position: absolute;
+}
+
+.main-section-book-shop-cover img {
+  height: 100%;
+  width: 100%;
+  /* object-fit: contain; */
+  /* position: absolute; */
+}
+
+.main-section-book-shop-autor {
+  /* border: 2px solid green; */
+  width: 150px;
+  /* height: 50px; */
+
+  position: relative;
+  /* margin: 0px; */
+
+  top: 49px;
+  left: 248px;
+
+  color: rgb(92, 106, 121);
+  font-family: "Open Sans";
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 14px;
+  letter-spacing: 0%;
+  text-align: left;
+  text-transform: capitalize;
+}
+
+.main-section-book-shop-title {
+  /* width: 150px; */
+
+  position: relative;
+  margin-top: -14px;
+  top: 67px;
+  left: 248px;
+
+  color: rgb(28, 42, 57);
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: 0%;
+  text-align: left;
+}
+
+.main-section-book-shop-star {
+  /* Star */
+  position: relative;
+  margin-top: -24px;
+  width: 12px;
+  height: 12px;
+  left: 248px;
+  top: 92px;
+
+  display: flex;
+  flex-direction: row;
+  
+}
+
+.main-section-book-shop-star-star {
+  margin-right: 1px;
+  
+}
+
+.main-section-book-shop-review{
+    position: relative;
+    margin-top: -10px;
+    height: 12px;
+    left: 318px;
+    top: 91px;
+
+    color: rgb(92, 106, 121);
+    font-family: "Open Sans";
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 14px;
+    letter-spacing: 0%;
+    text-align: left;
+}
+
+.main-section-book-shop-description{
+  position: relative;
+  margin-top: -10px;
+  height: 12px;
+  left: 248px;
+  top: 121px;
+  
+  color: rgb(92, 106, 121);
+  font-family: "Open Sans";
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 14px;
+  letter-spacing: 0%;
+  text-align: left;
+  text-transform: capitalize;
+  width: 170px;
+}
+
+.main-section-book-shop-price {
+  position: relative;
+  margin-top: -10px;
+  height: 12px;
+  left: 248px;
+  top: 175px;
+
+  color: rgb(28, 42, 57);
+  font-family: Montserrat;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0%;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.main-section-book-shop-buy{
+  position: relative;
+  margin-top: -10px;
+  width: 176px;
+  height: 45px;
+  left: 248px;
+  top: 207px;
+
+  box-sizing: border-box;
+  border: 1px solid rgb(76, 61, 178);
+
+  color: rgb(76, 61, 178);
+  font-family: Montserrat;
+  font-size: 8px;
+  font-weight: 700;
+  line-height: 45px;
+  letter-spacing: 0%;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.footer {
+  border: 2px solid red;
+  height: 74px;
 }
