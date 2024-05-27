@@ -1,23 +1,32 @@
 import './styles.css';
-import G_StarSilver from'./img/StarSilver.svg';
+import G_StarSilver from './img/StarSilver.svg';
+import G_StarYellow from './img/StarYellow.svg';
+import G_Icons from './img/icons.svg';
+import G_BannerOne from './img/banner_one.svg';
+import G_BannerTwo from './img/banner_two.svg';
+import G_BannerThree from './img/banner_three.svg';
 
 console.log('START');
 
+
+const headerIcon = document.querySelector(".header-img-icons");
+headerIcon.innerHTML = `<img src="${G_Icons}" alt="IMG" />`;
+
 const imgBase = [
-    {  
-        image: "./img/banner_one.svg",
+    {
+        image: `${G_BannerOne}`,
         image_dot1: "./img/darkish_dot.svg",
         image_dot2: "./img/lightish_dot.svg",
         image_dot3: "./img/lightish_dot.svg"
     },
     {
-        image: "./img/banner_two.svg",
+        image: `${G_BannerTwo}`,
         image_dot1: "./img/lightish_dot.svg",
         image_dot2: "./img/darkish_dot.svg",
         image_dot3: "./img/lightish_dot.svg"
     },
     {
-        image: "./img/banner_three.svg",
+        image: `${G_BannerThree}`,
         image_dot1: "./img/lightish_dot.svg",
         image_dot2: "./img/lightish_dot.svg",
         image_dot3: "./img/darkish_dot.svg"
@@ -155,8 +164,8 @@ function clickCategory(i) {
 
 function stars(i, categoryShop) {
   let starIntro = ``;
-  let starSilver = `<img src="img/StarSilver.svg"/>`;
-  let starYellow = `<img src="img/StarYellow.svg"/>`;
+  let starSilver = `<img src="${G_StarSilver}"/>`;
+  let starYellow = `<img src="${G_StarYellow}"/>`;
   if(categoryShop.items[i].volumeInfo.averageRating == undefined) {
     for(let j=0; j < 5; j++){
       starIntro += `<div class="main-section-book-shop-star-star">${starSilver}</div>`
@@ -233,3 +242,4 @@ function getCategoryShopHTML(categoryShop) {
 
 
 const bookFooter = document.querySelector(".footer");
+bookFooter.innerHTML = `<div> 1<img src="${G_StarSilver}"/></div>`
