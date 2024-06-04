@@ -5,6 +5,9 @@ import G_Icons from './img/icons.svg';
 import G_BannerOne from './img/banner_one.svg';
 import G_BannerTwo from './img/banner_two.svg';
 import G_BannerThree from './img/banner_three.svg';
+import G_DarkishDot from './img/darkish_dot.svg';
+import G_LightishDot from './img/lightish_dot.svg';
+import arrowOneImg from './img/arrow.svg';
 
 console.log('START');
 
@@ -15,21 +18,21 @@ headerIcon.innerHTML = `<img src="${G_Icons}" alt="IMG" />`;
 const imgBase = [
     {
         image: `${G_BannerOne}`,
-        image_dot1: "./img/darkish_dot.svg",
-        image_dot2: "./img/lightish_dot.svg",
-        image_dot3: "./img/lightish_dot.svg"
+        image_dot1: `${G_DarkishDot}`,
+        image_dot2: `${G_LightishDot}`,
+        image_dot3: `${G_LightishDot}`
     },
     {
         image: `${G_BannerTwo}`,
-        image_dot1: "./img/lightish_dot.svg",
-        image_dot2: "./img/darkish_dot.svg",
-        image_dot3: "./img/lightish_dot.svg"
+        image_dot1: `${G_LightishDot}`,
+        image_dot2: `${G_DarkishDot}`,
+        image_dot3: `${G_LightishDot}`
     },
     {
         image: `${G_BannerThree}`,
-        image_dot1: "./img/lightish_dot.svg",
-        image_dot2: "./img/lightish_dot.svg",
-        image_dot3: "./img/darkish_dot.svg"
+        image_dot1: `${G_LightishDot}`,
+        image_dot2: `${G_LightishDot}`,
+        image_dot3: `${G_DarkishDot}`
     },
 ]
 
@@ -44,6 +47,7 @@ banner_img_dot1.innerHTML = `<img src=`+imgBase[0].image_dot1+` alt="IMG"/>`;
 banner_img_dot2.innerHTML = `<img src=`+imgBase[0].image_dot2+` alt="IMG"/>`;
 banner_img_dot3.innerHTML = `<img src=`+imgBase[0].image_dot3+` alt="IMG"/>`;
 
+// Перелистывание баннера каждые 5 секунд
 setInterval(function() {
     if(index>2){index=0};
     banner_img.innerHTML = `<img src=`+imgBase[index].image+` alt="IMG"/>`;
@@ -53,9 +57,16 @@ setInterval(function() {
     index++;
 }, 5000);
 
+const arrowOne = document.querySelector(".main-section-banner-box-one__arrow");
+arrowOne.innerHTML = `<img src="${arrowOneImg}" alt="arrowOne"/>`;
+
+const arrowTwo = document.querySelector(".main-section-banner-box-two__arrow");
+arrowTwo.innerHTML = `<img src="${arrowOneImg}" alt="arrowTwo"/>`;
+
 // Три точки
 function changeImg(number) {
     if(number == 1) {
+      console.log("111");
         index=0;
         banner_img.innerHTML = `<img src=`+imgBase[0].image+` alt="IMG"/>`;
         banner_img_dot1.innerHTML = `<img src=`+imgBase[0].image_dot1+` alt="IMG"/>`;
@@ -78,6 +89,12 @@ function changeImg(number) {
     }
 
 }
+function cLog(){
+  console.log("Button = 1");
+}
+
+banner_img_dot1.addEventListener("click", cLog);
+
 
 //categoryList
 const category = ['Architecture', 'Art & Fashion', 'Biography', 'Business', 'Crafts & Hobbies', 'Drama', 'Fiction', 'Food & Drink', 'Health & Wellbeing', 'History & Politics', 'Humor', 'Poetry', 'Psychology', 'Sience', 'Technology', 'Travel & Maps'];
