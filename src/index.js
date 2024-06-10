@@ -5,55 +5,52 @@ import G_Icons from './img/icons.svg';
 import G_BannerOne from './img/banner_one.svg';
 import G_BannerTwo from './img/banner_two.svg';
 import G_BannerThree from './img/banner_three.svg';
-import G_DarkishDot from './img/darkish_dot.svg';
-import G_LightishDot from './img/lightish_dot.svg';
 import arrowOneImg from './img/arrow.svg';
+
 
 console.log('START');
 
-
+const parentPoints = document.querySelector('.main-section-banner-dots');
 const headerIcon = document.querySelector(".header-img-icons");
 headerIcon.innerHTML = `<img src="${G_Icons}" alt="IMG" />`;
 
 const imgBase = [
     {
-        image: `${G_BannerOne}`,
-        image_dot1: `${G_DarkishDot}`,
-        image_dot2: `${G_LightishDot}`,
-        image_dot3: `${G_LightishDot}`
+        image: `${G_BannerOne}`
     },
     {
-        image: `${G_BannerTwo}`,
-        image_dot1: `${G_LightishDot}`,
-        image_dot2: `${G_DarkishDot}`,
-        image_dot3: `${G_LightishDot}`
+        image: `${G_BannerTwo}`
     },
     {
-        image: `${G_BannerThree}`,
-        image_dot1: `${G_LightishDot}`,
-        image_dot2: `${G_LightishDot}`,
-        image_dot3: `${G_DarkishDot}`
+        image: `${G_BannerThree}`
     },
 ]
 
-let index=0;
+
+
+function initPointSlider(){
+  imgBase.forEach((img, index) => {
+    parentPoints.innerHTML += `<div class="banner-img-dot ${index === 0 ? 'active': ''}" data-index="${index}"></div>`;
+  })
+};
+
+function changeSliderImage(index){
+  banner_img.innerHTML = `<img src=`+imgBase[index].image+` alt="IMG"/>`;
+  document.querySelector(`.banner-img-dot.active`).classList.remove('active');
+  document.querySelector(`.banner-img-dot[data-index="${index}"]`).classList.add('active');
+}
+
+// инициализация баннера
+initPointSlider();
+
+let index = 0;
 const banner_img = document.querySelector(".banner-img");
 banner_img.innerHTML = `<img src=`+imgBase[0].image+` alt="IMG"/>`;
-
-const banner_img_dot1 = document.querySelector(".banner-img-dot1");
-const banner_img_dot2 = document.querySelector(".banner-img-dot2");
-const banner_img_dot3 = document.querySelector(".banner-img-dot3");
-banner_img_dot1.innerHTML = `<img src=`+imgBase[0].image_dot1+` alt="IMG"/>`;
-banner_img_dot2.innerHTML = `<img src=`+imgBase[0].image_dot2+` alt="IMG"/>`;
-banner_img_dot3.innerHTML = `<img src=`+imgBase[0].image_dot3+` alt="IMG"/>`;
 
 // Перелистывание баннера каждые 5 секунд
 setInterval(function() {
     if(index>2){index=0};
-    banner_img.innerHTML = `<img src=`+imgBase[index].image+` alt="IMG"/>`;
-    banner_img_dot1.innerHTML = `<img src=`+imgBase[index].image_dot1+` alt="IMG"/>`;
-    banner_img_dot2.innerHTML = `<img src=`+imgBase[index].image_dot2+` alt="IMG"/>`;
-    banner_img_dot3.innerHTML = `<img src=`+imgBase[index].image_dot3+` alt="IMG"/>`;
+    changeSliderImage(index);
     index++;
 }, 5000);
 
@@ -64,35 +61,12 @@ const arrowTwo = document.querySelector(".main-section-banner-box-two__arrow");
 arrowTwo.innerHTML = `<img src="${arrowOneImg}" alt="arrowTwo"/>`;
 
 // Три точки
-function changeImg(number) {
-    if(number == 1) {
-      console.log("111");
-        index=0;
-        banner_img.innerHTML = `<img src=`+imgBase[0].image+` alt="IMG"/>`;
-        banner_img_dot1.innerHTML = `<img src=`+imgBase[0].image_dot1+` alt="IMG"/>`;
-        banner_img_dot2.innerHTML = `<img src=`+imgBase[0].image_dot2+` alt="IMG"/>`;
-        banner_img_dot3.innerHTML = `<img src=`+imgBase[0].image_dot3+` alt="IMG"/>`;
-    }
-    if(number == 2) {
-        index=1;
-        banner_img.innerHTML = `<img src=`+imgBase[1].image+` alt="IMG"/>`;
-        banner_img_dot1.innerHTML = `<img src=`+imgBase[1].image_dot1+` alt="IMG"/>`;
-        banner_img_dot2.innerHTML = `<img src=`+imgBase[1].image_dot2+` alt="IMG"/>`;
-        banner_img_dot3.innerHTML = `<img src=`+imgBase[1].image_dot3+` alt="IMG"/>`;
-    }
-    if(number == 3) {
-        index=3;
-        banner_img.innerHTML = `<img src=`+imgBase[2].image+` alt="IMG"/>`;
-        banner_img_dot1.innerHTML = `<img src=`+imgBase[2].image_dot1+` alt="IMG"/>`;
-        banner_img_dot2.innerHTML = `<img src=`+imgBase[2].image_dot2+` alt="IMG"/>`;
-        banner_img_dot3.innerHTML = `<img src=`+imgBase[2].image_dot3+` alt="IMG"/>`;
-    }
-
-}
-
-banner_img_dot1.addEventListener("click", ()=> changeImg(1));
-banner_img_dot2.addEventListener("click", ()=> changeImg(2));
-banner_img_dot3.addEventListener("click", ()=> changeImg(3));
+document.addEventListener('click', (event)=>{
+  if(event.target.classList.contains('banner-img-dot')){
+    const index = event.target.getAttribute('data-index');
+    changeSliderImage(index);
+  }
+});
 
 
 //categoryList

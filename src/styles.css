@@ -201,19 +201,20 @@ main {
   
   width: 56px;
   height: 12px;
+  gap: 10px;
 }
 
-.banner-img-dot1 {
+.banner-img-dot {
   cursor: pointer;
-}
-.banner-img-dot2 {
-  cursor: pointer;
-}
-.banner-img-dot3 {
-  cursor: pointer;
+  width: 12px;
+  height: 12px;
+  background: #d4d4d4;
+  border-radius: 50%
 }
 
-
+.banner-img-dot.active {
+  background: #9E98DC;
+}
 
 
 .main-section-book {
