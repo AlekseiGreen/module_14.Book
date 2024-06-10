@@ -89,11 +89,10 @@ function changeImg(number) {
     }
 
 }
-function cLog(){
-  console.log("Button = 1");
-}
 
-banner_img_dot1.addEventListener("click", cLog);
+banner_img_dot1.addEventListener("click", ()=> changeImg(1));
+banner_img_dot2.addEventListener("click", ()=> changeImg(2));
+banner_img_dot3.addEventListener("click", ()=> changeImg(3));
 
 
 //categoryList
@@ -144,13 +143,14 @@ function getCategoryListHTML(categoryIntro) {
   let requestURL4 = 6;
   let requestURL5 = '&langRestrict=en';
   let requestURL = requestURL1 + requestURL2 + requestURL3 + requestURL4 + requestURL5;
-  console.log('Cons', requestURL1 + requestURL2);
+  // console.log('Cons', requestURL1 + requestURL2);
 
   
   let categoryListHTML = "";
+  //список категорий
   for(let i=0; i<categoryIntro.length; i++){
     let catalogDotActive = `${i===j? '<div class="main-section-book-box__title-category-active-ellipse"></div>':''}`;
-    let catalogActive = `<div class="main-section-book-box__title-category ${i === j ? "main-section-book-box__title-category-active": ""} " onclick="clickCategory(${i})">${categoryIntro[i]}</div>`;
+    let catalogActive = `<div class="main-section-book-box__title-category ${i === j ? "main-section-book-box__title-category-active": ""}" onclick="clickCategory(i)">${categoryIntro[i]}</div>`;
     categoryListHTML += catalogDotActive + catalogActive;
     console.log(j);
     
@@ -167,6 +167,9 @@ function getCategoryListHTML(categoryIntro) {
   return [categoryListHTML];
 }
 
+//onclick="${clickCategory(i)}"
+
+
 // Первый запууск
 list_categories.innerHTML =  getCategoryListHTML(category);
 
@@ -175,8 +178,9 @@ function clickCategory(i) {
     // Глобальная переменная j
     j = i;
     list_categories.innerHTML =  getCategoryListHTML(category);
-}
-//end-categoryList
+}//end-categoryList
+
+
 
 
 function stars(i, categoryShop) {
