@@ -1,0 +1,257 @@
+import './styles.css';
+import G_StarSilver from './img/StarSilver.svg';
+import G_StarYellow from './img/StarYellow.svg';
+import G_Icons from './img/icons.svg';
+import G_BannerOne from './img/banner_one.svg';
+import G_BannerTwo from './img/banner_two.svg';
+import G_BannerThree from './img/banner_three.svg';
+import arrowOneImg from './img/arrow.svg';
+
+
+console.log('START');
+
+const parentPoints = document.querySelector('.main-section-banner-dots');
+const headerIcon = document.querySelector(".header-img-icons");
+headerIcon.innerHTML = `<img src="${G_Icons}" alt="IMG" />`;
+
+const imgBase = [
+    {
+        image: `${G_BannerOne}`
+    },
+    {
+        image: `${G_BannerTwo}`
+    },
+    {
+        image: `${G_BannerThree}`
+    },
+]
+
+
+
+function initPointSlider(){
+  imgBase.forEach((img, index) => {
+    parentPoints.innerHTML += `<div class="banner-img-dot ${index === 0 ? 'active': ''}" data-index="${index}"></div>`;
+  })
+};
+
+function changeSliderImage(index){
+  banner_img.innerHTML = `<img src=`+imgBase[index].image+` alt="IMG"/>`;
+  document.querySelector(`.banner-img-dot.active`).classList.remove('active');
+  document.querySelector(`.banner-img-dot[data-index="${index}"]`).classList.add('active');
+}
+
+// инициализация баннера
+initPointSlider();
+
+let index = 0;
+const banner_img = document.querySelector(".banner-img");
+banner_img.innerHTML = `<img src=`+imgBase[0].image+` alt="IMG"/>`;
+
+// Перелистывание баннера каждые 5 секунд
+setInterval(function() {
+    if(index>2){index=0};
+    changeSliderImage(index);
+    index++;
+}, 5000);
+
+const arrowOne = document.querySelector(".main-section-banner-box-one__arrow");
+arrowOne.innerHTML = `<img src="${arrowOneImg}" alt="arrowOne"/>`;
+
+const arrowTwo = document.querySelector(".main-section-banner-box-two__arrow");
+arrowTwo.innerHTML = `<img src="${arrowOneImg}" alt="arrowTwo"/>`;
+
+
+
+
+//categoryList
+const category = ['Architecture', 'Art & Fashion', 'Biography', 'Business', 'Crafts & Hobbies', 'Drama', 'Fiction', 'Food & Drink', 'Health & Wellbeing', 'History & Politics', 'Humor', 'Poetry', 'Psychology', 'Sience', 'Technology', 'Travel & Maps'];
+
+
+// Выполнение запроса googlebooks key API
+function getBooks(method, url){
+  return new Promise((resolve, reject)=>{
+    let xhr = new XMLHttpRequest();
+    xhr.open(method, url);
+    xhr.responseType = 'json';
+
+    xhr.onload = ()=> {
+      if(xhr.status>=400){
+        reject(xhr.response);
+        console.log('Before OFF');
+      } else{
+        resolve(xhr.response);
+      }
+      
+    }
+
+    xhr.send();
+  });
+  
+}
+
+// Создание Ячейки книг
+const bookShop = document.querySelector(".main-section-book-shop");
+
+
+
+// Глобальная переменная j
+let j=0;
+
+// Объявление Список жанров
+const list_categories = document.querySelector(".main-section-book-box__title");
+
+
+
+function getCategoryListHTML(categoryIntro) {
+  let requestURL1 = 'https://www.googleapis.com/books/v1/volumes?q="subject:';
+  let requestURL2;
+  
+  requestURL2 = category[j];
+  
+  let requestURL3 = '"&key=AIzaSyC2XD5L6WHFV8Mtjhs0yU0aDr7B97i0tk0&printType=books&startIndex=0&maxResults=';
+  let requestURL4 = 6;
+  let requestURL5 = '&langRestrict=en';
+  let requestURL = requestURL1 + requestURL2 + requestURL3 + requestURL4 + requestURL5;
+  // console.log('Cons', requestURL1 + requestURL2);
+
+  
+  let categoryListHTML = "";
+  //список категорий
+  for(let i=0; i<categoryIntro.length; i++){
+    let catalogDotActive = `${i==j? '<div class="main-section-book-box__title-category-active-ellipse"></div>':''}`;
+    let catalogActive = `<div class="main-section-book-box__title-category ${i == j ? "main-section-book-box__title-category-active": ""}" data-index="${i}">${categoryIntro[i]}</div>`;
+    categoryListHTML += catalogDotActive + catalogActive;
+  }
+  getBooks('GET', requestURL)
+    .then(catalogyShop=>{
+      // Вывод Ячейки книг
+      bookShop.innerHTML = getCategoryShopHTML(catalogyShop);
+    })
+    .catch(error => {
+      console.error(error);
+  });
+  
+  return [categoryListHTML];
+}
+
+
+// Первый запууск
+list_categories.innerHTML =  getCategoryListHTML(category);
+
+// Функция выделяет жирным шрифтом выбранную строку
+function clickCategory(i) {
+    console.log("GuncClick=", i);
+    // Глобальная переменная j
+    j = i;
+    list_categories.innerHTML =  getCategoryListHTML(category);
+}//end-categoryList
+
+
+
+
+function stars(i, categoryShop) {
+  let starIntro = ``;
+  let starSilver = `<img src="${G_StarSilver}"/>`;
+  let starYellow = `<img src="${G_StarYellow}"/>`;
+  if(categoryShop.items[i].volumeInfo.averageRating == undefined) {
+    for(let j=0; j < 5; j++){
+      starIntro += `<div class="main-section-book-shop-star-star">${starSilver}</div>`
+    }
+  } else {
+    for(let j=0; j < 5; j++){
+      if(j < categoryShop.items[i].volumeInfo.averageRating ) {
+        starIntro += `<div class="main-section-book-shop-star-star">${starYellow}</div>`
+      }
+      else {
+        starIntro += `<div class="main-section-book-shop-star-star">${starSilver}</div>`
+      }
+    }
+  }
+  return starIntro;
+}
+
+
+
+function review(i, categoryShop) {
+  let count;
+  let reviewCount = ``;
+  if(categoryShop.items[i].volumeInfo.ratingCount == undefined) {
+    count = 0;
+    reviewCount += `<div>${count} review</div>`
+  }
+  return reviewCount;
+}
+
+function descript(i, categoryShop) {
+  let descriptDiv = ``;
+  if(categoryShop.items[i].volumeInfo.description == undefined) {
+    descriptDiv += `<div>${descriptDiv} review1</div>`
+  } else{
+    descriptDiv += `<div>${categoryShop.items[i].volumeInfo.description.substring(0, 80)} review</div>`
+  }
+  return descriptDiv;
+}
+
+function price(i, categoryShop){
+  let priceDiv = '';
+  if(categoryShop.items[i].saleInfo.retailPrice == undefined){
+    priceDiv += '<div>&#8381 0</div>'
+  } else{
+    priceDiv += `<div>&#8381 ${categoryShop.items[i].saleInfo.retailPrice.amoun }</div>`;
+  }
+
+  //console.log('PRICE->', pr);
+  return priceDiv;
+}
+
+
+
+function getCategoryShopHTML(categoryShop) {
+  let categoryShopHTML = "";
+    for(let i=0; i<categoryShop.items.length; i++) {
+        categoryShopHTML += `
+        <div class="main-section-book-shop__more">
+            <div class="main-section-book-shop-cover"><img src="${categoryShop.items[i].volumeInfo.imageLinks.thumbnail}" style="background-size: cover;" alt="imgBook"/></div>
+            <div class="main-section-book-shop-autor">${categoryShop.items[i].volumeInfo.authors[0]}</div>
+            <div class="main-section-book-shop-title">${categoryShop.items[i].volumeInfo.title.substring(0, 15)}</div>
+            <div class="main-section-book-shop-star">${stars(i, categoryShop)}</div>
+            <div class="main-section-book-shop-review">${review(i, categoryShop)}</div>
+            <div class="main-section-book-shop-description">${descript(i, categoryShop)}</div>
+            <div class="main-section-book-shop-price">${price(i, categoryShop)}</div>
+            <div class="main-section-book-shop-buy">buy now</div>
+        </div>`;
+
+    }
+    categoryShopHTML += `<div class="main-section-book-shop-button">LOAD MORE</div>`;
+    return categoryShopHTML;
+}
+
+
+const bookFooter = document.querySelector(".footer");
+bookFooter.innerHTML = `<div></div>`
+
+/* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
+// Клик-событие 
+document.addEventListener('click', (event)=>{
+  // Три точки
+  if(event.target.classList.contains('banner-img-dot')){
+    const index = event.target.getAttribute('data-index');
+    changeSliderImage(index);
+  }
+
+  //Список категорий
+  if(event.target.classList.contains('main-section-book-box__title-category')){
+    let index = event.target.getAttribute('data-index');
+    clickCategory(index);
+    console.log("Click=", index, j);
+  }
+
+  //LOAD MORE
+  if(event.target.classList.contains('main-section-book-shop-button')){
+    console.log("LOAD MORE");
+  }
+
+
+  console.log(event.target);
+});
+/* vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv */
