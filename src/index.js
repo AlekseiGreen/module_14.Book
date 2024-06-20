@@ -27,20 +27,21 @@ const imgBase = [
 ]
 
 
-
+// Инициализация точки
 function initPointSlider(){
   imgBase.forEach((img, index) => {
     parentPoints.innerHTML += `<div class="banner-img-dot ${index === 0 ? 'active': ''}" data-index="${index}"></div>`;
   })
-};
+}// end Инициализация точки
 
+// Слайдер главной картинки
 function changeSliderImage(index){
   banner_img.innerHTML = `<img src=`+imgBase[index].image+` alt="IMG"/>`;
   document.querySelector(`.banner-img-dot.active`).classList.remove('active');
   document.querySelector(`.banner-img-dot[data-index="${index}"]`).classList.add('active');
-}
+}// end Слайдер главной картинки
 
-// инициализация баннера
+// Инициализация баннера
 initPointSlider();
 
 let index = 0;
@@ -86,43 +87,50 @@ function getBooks(method, url){
 
     xhr.send();
   });
-  
-}
+}// end Выполнение запроса googlebooks key API
 
 // Создание Ячейки книг
 const bookShop = document.querySelector(".main-section-book-shop");
 
 
 
-// Глобальная переменная j
+// Глобальные переменные
 let j=0;
+let G_initQuantityBooks = 6;
+let G_quantityBooks = G_initQuantityBooks;
+let G_addQuantityBooks = 2;
+// end Глобальные переменные
 
 // Объявление Список жанров
 const list_categories = document.querySelector(".main-section-book-box__title");
 
-
-
-function getCategoryListHTML(categoryIntro) {
+// Google book API
+function getRequestURL(in_quantityBooks){
   let requestURL1 = 'https://www.googleapis.com/books/v1/volumes?q="subject:';
   let requestURL2;
   
   requestURL2 = category[j];
   
   let requestURL3 = '"&key=AIzaSyC2XD5L6WHFV8Mtjhs0yU0aDr7B97i0tk0&printType=books&startIndex=0&maxResults=';
-  let requestURL4 = 6;
+  let requestURL4 = in_quantityBooks;
   let requestURL5 = '&langRestrict=en';
   let requestURL = requestURL1 + requestURL2 + requestURL3 + requestURL4 + requestURL5;
-  // console.log('Cons', requestURL1 + requestURL2);
+  return requestURL;
+}// end Google book API
 
+// Формирование списка категорий
+function getCategoryListHTML(in_categoryList, in_quantityBooks) {
+  
+  let reqURL = getRequestURL(in_quantityBooks);
   
   let categoryListHTML = "";
-  //список категорий
-  for(let i=0; i<categoryIntro.length; i++){
+  // список категорий
+  for(let i=0; i<in_categoryList.length; i++){
     let catalogDotActive = `${i==j? '<div class="main-section-book-box__title-category-active-ellipse"></div>':''}`;
-    let catalogActive = `<div class="main-section-book-box__title-category ${i == j ? "main-section-book-box__title-category-active": ""}" data-index="${i}">${categoryIntro[i]}</div>`;
+    let catalogActive = `<div class="main-section-book-box__title-category ${i == j ? "main-section-book-box__title-category-active": ""}" data-index="${i}">${in_categoryList[i]}</div>`;
     categoryListHTML += catalogDotActive + catalogActive;
   }
-  getBooks('GET', requestURL)
+  getBooks('GET', reqURL)
     .then(catalogyShop=>{
       // Вывод Ячейки книг
       bookShop.innerHTML = getCategoryShopHTML(catalogyShop);
@@ -132,23 +140,26 @@ function getCategoryListHTML(categoryIntro) {
   });
   
   return [categoryListHTML];
-}
+}// end Формирование списка категорий
 
 
-// Первый запууск
-list_categories.innerHTML =  getCategoryListHTML(category);
+// Первый запуск
+list_categories.innerHTML =  getCategoryListHTML(category, G_quantityBooks);
 
 // Функция выделяет жирным шрифтом выбранную строку
 function clickCategory(i) {
-    console.log("GuncClick=", i);
     // Глобальная переменная j
     j = i;
-    list_categories.innerHTML =  getCategoryListHTML(category);
-}//end-categoryList
+    list_categories.innerHTML =  getCategoryListHTML(category, G_quantityBooks);
+}//end Функция выделяет жирным шрифтом выбранную строку
 
+// Загрузить больше книг
+function loadMore(in_quantityBooks) {
+  list_categories.innerHTML =  getCategoryListHTML(category, in_quantityBooks);
+  return 2;
+}//end Загрузить больше книг
 
-
-
+// Оценка-звездочка
 function stars(i, categoryShop) {
   let starIntro = ``;
   let starSilver = `<img src="${G_StarSilver}"/>`;
@@ -168,7 +179,7 @@ function stars(i, categoryShop) {
     }
   }
   return starIntro;
-}
+}// end Оценка-звездочка
 
 
 
@@ -231,8 +242,9 @@ const bookFooter = document.querySelector(".footer");
 bookFooter.innerHTML = `<div></div>`
 
 /* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
-// Клик-событие 
+// Клик-событие
 document.addEventListener('click', (event)=>{
+  
   // Три точки
   if(event.target.classList.contains('banner-img-dot')){
     const index = event.target.getAttribute('data-index');
@@ -242,16 +254,17 @@ document.addEventListener('click', (event)=>{
   //Список категорий
   if(event.target.classList.contains('main-section-book-box__title-category')){
     let index = event.target.getAttribute('data-index');
+    G_quantityBooks = G_initQuantityBooks;
     clickCategory(index);
-    console.log("Click=", index, j);
   }
 
-  //LOAD MORE
+  // Загрузить больше книг
   if(event.target.classList.contains('main-section-book-shop-button')){
-    console.log("LOAD MORE");
+    G_quantityBooks = G_quantityBooks + loadMore(G_quantityBooks + G_addQuantityBooks);
+    console.log(G_quantityBooks);
   }
 
 
   console.log(event.target);
-});
+});// end Клик-событие
 /* vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv */
