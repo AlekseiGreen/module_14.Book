@@ -10,6 +10,10 @@ import arrowOneImg from './img/arrow.svg';
 
 console.log('START');
 
+const siteHeader = document.querySelector(".siteHeader");
+// siteHeader.style.
+
+
 const parentPoints = document.querySelector('.main-section-banner-dots');
 const headerIcon = document.querySelector(".header-img-icons");
 headerIcon.innerHTML = `<img src="${G_Icons}" alt="IMG" />`;
@@ -98,7 +102,7 @@ const bookShop = document.querySelector(".main-section-book-shop");
 let j=0;
 let G_initQuantityBooks = 6;
 let G_quantityBooks = G_initQuantityBooks;
-let G_addQuantityBooks = 2;
+let G_addQuantityBooks = 6;
 // end Глобальные переменные
 
 // Объявление Список жанров
@@ -154,9 +158,10 @@ function clickCategory(i) {
 }//end Функция выделяет жирным шрифтом выбранную строку
 
 // Загрузить больше книг
-function loadMore(in_quantityBooks) {
+function loadMore(in_quantityBooks, in_addQuantityBooks) {
   list_categories.innerHTML =  getCategoryListHTML(category, in_quantityBooks);
-  return 2;
+  let out_addQuantityBooks = in_addQuantityBooks;
+  return out_addQuantityBooks;
 }//end Загрузить больше книг
 
 // Оценка-звездочка
@@ -239,12 +244,12 @@ function getCategoryShopHTML(categoryShop) {
 
 
 const bookFooter = document.querySelector(".footer");
-bookFooter.innerHTML = `<div></div>`
+bookFooter.innerHTML = `<div></div>`;
 
 /* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
 // Клик-событие
 document.addEventListener('click', (event)=>{
-  
+
   // Три точки
   if(event.target.classList.contains('banner-img-dot')){
     const index = event.target.getAttribute('data-index');
@@ -260,8 +265,11 @@ document.addEventListener('click', (event)=>{
 
   // Загрузить больше книг
   if(event.target.classList.contains('main-section-book-shop-button')){
-    G_quantityBooks = G_quantityBooks + loadMore(G_quantityBooks + G_addQuantityBooks);
-    console.log(G_quantityBooks);
+    console.log("number_1 =", G_quantityBooks);
+    console.log("number_2 =", G_addQuantityBooks);
+    G_quantityBooks = G_quantityBooks + loadMore(G_quantityBooks + G_addQuantityBooks, G_addQuantityBooks);
+    
+    document.documentElement.style.setProperty("--size-width", 70);
   }
 
 

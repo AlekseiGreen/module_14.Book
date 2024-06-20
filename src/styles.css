@@ -1,20 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
-/* *{
+
+*{
   outline: 2px solid green !important;  
-} */
+}
+
+:root {
+  --size-width: 0px;
+}
 
 header {
   height: 116px;
+  
 }
 
 .siteHeader {
   width: 1120px;
   height: 116px;
   margin: auto;
+  /* margin-left: var(--size-width); */
   
-  position: relative;
-
+  /* position: relative; */
+  position: fixed;
+  transform: translate(17.15%, 0%);
+  background-color: white;
+  z-index: 99;
 }
 
 .logo {
@@ -106,11 +116,12 @@ header {
   top: 53px;
 }
 
-main {
+/* main {
     
-}
+} */
 
 .main-section-banner {
+  padding-top: 116px;
   min-height: 807px;
 }
 
@@ -120,7 +131,7 @@ main {
   background-color: #9E98DC;
 
   position: absolute;
-  right: -87px;
+  right: 74px;
   top: 198px;
 }
 
@@ -153,7 +164,7 @@ main {
   background-color: #FF8FE6;
 
   position: absolute;
-  right: -158px;
+  right: 0px;
   top: 478px;
 }
 
@@ -188,8 +199,8 @@ main {
   
 }
 
-.main-section-banner-slider {
-}
+/* .main-section-banner-slider {
+} */
 
 .main-section-banner-dots {
   display: flex;
@@ -361,7 +372,7 @@ main {
 }
 
 .main-section-book-shop-title {
-  /* width: 150px; */
+  width: 150px;
 
   position: relative;
   margin-top: -14px;
@@ -397,19 +408,21 @@ main {
 }
 
 .main-section-book-shop-review{
-    position: relative;
-    margin-top: -10px;
-    height: 12px;
-    left: 318px;
-    top: 91px;
+  width: 80px;
+    
+  position: relative;
+  margin-top: -10px;
+  height: 12px;
+  left: 318px;
+  top: 91px;
 
-    color: rgb(92, 106, 121);
-    font-family: "Open Sans";
-    font-size: 10px;
-    font-weight: 400;
-    line-height: 14px;
-    letter-spacing: 0%;
-    text-align: left;
+  color: rgb(92, 106, 121);
+  font-family: "Open Sans";
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 14px;
+  letter-spacing: 0%;
+  text-align: left;
 }
 
 .main-section-book-shop-description{
@@ -431,6 +444,8 @@ main {
 }
 
 .main-section-book-shop-price {
+  width: 150px;
+
   position: relative;
   margin-top: -10px;
   height: 12px;
