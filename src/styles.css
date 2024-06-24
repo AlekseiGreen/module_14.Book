@@ -1,30 +1,93 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
-*{
+/* *{
   outline: 2px solid green !important;  
+} */
+
+body {
+margin: 0;
 }
 
-:root {
-  --size-width: 0px;
-}
-
-header {
-  height: 116px;
+.general-grid {
+  display: grid;
   
+  grid-template-areas:
+  "grid-header-left grid-header grid-header grid-header-right"
+  "grid-main-left grid-main grid-main grid-main-right"
+  "grid-sidebar-left grid-sidebar grid-content grid-content-right"
+  "grid-footer grid-footer grid-footer grid-footer"
+  ;
+  grid-template-columns: 1fr 196px 924px 1fr;
+  grid-template-rows: 116px 836px 1fr 33px;
+
 }
 
-.siteHeader {
-  width: 1120px;
-  height: 116px;
-  margin: auto;
-  /* margin-left: var(--size-width); */
-  
-  /* position: relative; */
-  position: fixed;
-  transform: translate(17.15%, 0%);
+.grid-header-left{
+  position: sticky;
+  top: 0;
+
+  grid-area: grid-header-left;
   background-color: white;
-  z-index: 99;
+
+  z-index: 9;
+}
+
+.grid-header {
+  position: sticky;
+  top: 0;
+
+  grid-area: grid-header;
+  background-color: white;
+
+  z-index: 9;
+}
+
+.grid-header-right {
+  position: sticky;
+  top: 0;
+
+  grid-area: grid-header-right;
+  background-color: white;
+
+  z-index: 9;
+}
+
+.grid-main-left {
+  grid-area: grid-main-left;
+}
+
+.grid-main {
+  grid-area: grid-main;
+
+  position: relative;
+}
+
+.grid-main-right {
+  grid-area: grid-main-right;
+}
+
+.grid-sidebar-left {
+  grid-area: grid-sidebar-left;
+}
+
+.grid-sidebar {
+  grid-area: grid-sidebar;
+
+  position: relative;
+}
+
+.grid-content {
+  grid-area: grid-content;
+}
+
+.grid-content-right {
+  grid-area: grid-content-right;
+}
+
+.grid-footer {
+  grid-area: grid-footer;
+  overflow: auto;
 }
 
 .logo {
@@ -42,7 +105,7 @@ header {
   cursor: pointer;
 }
 
-.header-img-icons{
+.header-img-icons {
   cursor: pointer;
 }
 
@@ -116,14 +179,7 @@ header {
   top: 53px;
 }
 
-/* main {
-    
-} */
-
-.main-section-banner {
-  padding-top: 116px;
-  min-height: 807px;
-}
+/* MAIN */
 
 .main-section-banner-box-one {
   width: 149px;
@@ -131,11 +187,13 @@ header {
   background-color: #9E98DC;
 
   position: absolute;
-  right: 74px;
-  top: 198px;
+  left: 1057px;
+  top: 79px;
+
+  cursor: pointer;
 }
 
-.main-section-banner-box-one__text{
+.main-section-banner-box-one__text {
   width: 109px;
   height: 66px;
 
@@ -164,8 +222,10 @@ header {
   background-color: #FF8FE6;
 
   position: absolute;
-  right: 0px;
+  left: 1143px;
   top: 478px;
+
+  cursor: pointer;
 }
 
 .main-section-banner-box-two__text {
@@ -196,7 +256,8 @@ header {
   width: 1120px;
   height: 702px;
 
-  
+  position: relative;
+  top: 0;
 }
 
 /* .main-section-banner-slider {
@@ -227,35 +288,18 @@ header {
   background: #9E98DC;
 }
 
-
-.main-section-book {
-  width: 1440px;
-  height: 1275px;
-  margin: auto;
-  position: relative;
-}
-
-.main-section-book-box {
-  width: 416px;
-  height: 710px;
-
-  background: #EFEEF6;
-
-  position: absolute;
-}
-
 .main-section-book-box__title {
-  flex-shrink: 0;
+  width: 256px;
+  padding-left: 200px;
+  padding-top: 45px;
+  padding-bottom: 81px;
   background: #EFEEF6;
 
   position: absolute;
-  
-  top: 45px;
-  left: 160px;
-  
+  left: -200px;
 }
 
-.main-section-book-box__title-category{
+.main-section-book-box__title-category {
   font-family: Montserrat;
   font-size: 12px;
   font-weight: 500;
@@ -266,7 +310,7 @@ header {
   cursor: pointer;
 }
 
-.main-section-book-box__title-category-active{
+.main-section-book-box__title-category-active {
   font-family: Montserrat;
   font-size: 16px;
   font-weight: 700;
@@ -278,7 +322,7 @@ header {
 
 }
 
-.main-section-book-box__title-category-active-ellipse{
+.main-section-book-box__title-category-active-ellipse {
   width: 6px;
   height: 6px;
 
@@ -292,13 +336,7 @@ header {
 }
 
 .main-section-book-shop {
-  width: 924px;
-  /* height: 1233px; */
-  position: absolute;
-
-  top: 46px;
-  right: 160px;
-
+  padding-top: 46px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -407,7 +445,7 @@ header {
   
 }
 
-.main-section-book-shop-review{
+.main-section-book-shop-review {
   width: 80px;
     
   position: relative;
@@ -425,7 +463,7 @@ header {
   text-align: left;
 }
 
-.main-section-book-shop-description{
+.main-section-book-shop-description {
   position: relative;
   margin-top: -10px;
   height: 12px;
@@ -462,7 +500,7 @@ header {
   text-transform: uppercase;
 }
 
-.main-section-book-shop-buy{
+.main-section-book-shop-buy {
   position: relative;
   margin-top: -10px;
   width: 176px;

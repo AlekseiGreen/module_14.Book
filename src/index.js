@@ -242,10 +242,6 @@ function getCategoryShopHTML(categoryShop) {
     return categoryShopHTML;
 }
 
-
-const bookFooter = document.querySelector(".footer");
-bookFooter.innerHTML = `<div></div>`;
-
 /* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
 // Клик-событие
 document.addEventListener('click', (event)=>{
@@ -268,10 +264,12 @@ document.addEventListener('click', (event)=>{
     console.log("number_1 =", G_quantityBooks);
     console.log("number_2 =", G_addQuantityBooks);
     G_quantityBooks = G_quantityBooks + loadMore(G_quantityBooks + G_addQuantityBooks, G_addQuantityBooks);
-    
-    document.documentElement.style.setProperty("--size-width", 70);
   }
 
+  // main-section-book-shop-buy
+  if(event.target.classList.contains('main-section-book-shop-buy')){
+    console.log('Buy book');
+  }
 
   console.log(event.target);
 });// end Клик-событие
