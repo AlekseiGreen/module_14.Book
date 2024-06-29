@@ -8,6 +8,17 @@ import G_BannerThree from './img/banner_three.svg';
 import arrowOneImg from './img/arrow.svg';
 
 
+// Глобальные переменные
+let j=0;
+let G_initQuantityBooks = 6;
+let G_quantityBooks = G_initQuantityBooks;
+let G_addQuantityBooks = 6;
+let G_numberShoppingBooks;
+// Информация о книгах, добавленных в корзину
+let G_localStorage = [];
+// end Глобальные переменные
+
+
 console.log('START');
 
 const siteHeader = document.querySelector(".siteHeader");
@@ -16,7 +27,9 @@ const siteHeader = document.querySelector(".siteHeader");
 
 const parentPoints = document.querySelector('.main-section-banner-dots');
 const headerIcon = document.querySelector(".header-img-icons");
-headerIcon.innerHTML = `<img src="${G_Icons}" alt="IMG" />`;
+headerIcon.innerHTML = `
+  <img src="${G_Icons}" alt="IMG" />
+  `;
 
 const imgBase = [
     {
@@ -66,9 +79,6 @@ const arrowTwo = document.querySelector(".main-section-banner-box-two__arrow");
 arrowTwo.innerHTML = `<img src="${arrowOneImg}" alt="arrowTwo"/>`;
 
 
-// Информация о книгах, добавленных в корзину
-let localStorage = [];
-
 
 
 //categoryList
@@ -99,14 +109,6 @@ function getBooks(method, url){
 // Создание Ячейки книг
 const bookShop = document.querySelector(".main-section-book-shop");
 
-
-
-// Глобальные переменные
-let j=0;
-let G_initQuantityBooks = 6;
-let G_quantityBooks = G_initQuantityBooks;
-let G_addQuantityBooks = 6;
-// end Глобальные переменные
 
 // Объявление Список жанров
 const list_categories = document.querySelector(".main-section-book-box__title");
@@ -276,18 +278,23 @@ document.addEventListener('click', (event)=>{
   // main-section-book-shop-buy
   if(event.target.classList.contains('main-section-book-shop-buy')){
     let dataID = event.target.getAttribute('data-id');
-    let findId = localStorage.indexOf(dataID);
+    let findId = G_localStorage.indexOf(dataID);
     // includes простой поиск true/false
     if(findId != -1){
       console.log('True=', findId);
-      localStorage.splice(findId, 1);
+      G_localStorage.splice(findId, 1);
     } else{
       console.log('False=', findId);
-      localStorage.push(dataID);
+      G_localStorage.push(dataID);
     }
 
-    console.log(localStorage);
-    console.log(localStorage.length);
+    console.log(G_localStorage);
+    G_numberShoppingBooks = G_localStorage.length;
+    console.log(G_numberShoppingBooks);
+    headerIcon.innerHTML = `
+      <img src="${G_Icons}" alt="IMG" />
+      <div>Number=${G_numberShoppingBooks}</div>
+    `;
   }
 
   console.log(event.target);
