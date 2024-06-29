@@ -66,6 +66,9 @@ const arrowTwo = document.querySelector(".main-section-banner-box-two__arrow");
 arrowTwo.innerHTML = `<img src="${arrowOneImg}" alt="arrowTwo"/>`;
 
 
+// Информация о книгах, добавленных в корзину
+let localStorage = [];
+
 
 
 //categoryList
@@ -220,6 +223,10 @@ function price(i, categoryShop){
   return priceDiv;
 }
 
+// Получение и формирование ID
+function getBookID(id){
+  return id;
+}
 
 
 function getCategoryShopHTML(categoryShop) {
@@ -234,7 +241,7 @@ function getCategoryShopHTML(categoryShop) {
             <div class="main-section-book-shop-review">${review(i, categoryShop)}</div>
             <div class="main-section-book-shop-description">${descript(i, categoryShop)}</div>
             <div class="main-section-book-shop-price">${price(i, categoryShop)}</div>
-            <div class="main-section-book-shop-buy">buy now</div>
+            <div class="main-section-book-shop-buy" data-id="${getBookID(categoryShop.items[i].volumeInfo.title.substring(0, 15))}">buy now</div>
         </div>`;
 
     }
@@ -268,7 +275,19 @@ document.addEventListener('click', (event)=>{
 
   // main-section-book-shop-buy
   if(event.target.classList.contains('main-section-book-shop-buy')){
-    console.log('Buy book');
+    let dataID = event.target.getAttribute('data-id');
+    let findId = localStorage.indexOf(dataID);
+    // includes простой поиск true/false
+    if(findId != -1){
+      console.log('True=', findId);
+      localStorage.splice(findId, 1);
+    } else{
+      console.log('False=', findId);
+      localStorage.push(dataID);
+    }
+
+    console.log(localStorage);
+    console.log(localStorage.length);
   }
 
   console.log(event.target);
