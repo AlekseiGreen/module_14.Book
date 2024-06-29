@@ -179,6 +179,26 @@ margin: 0;
   top: 53px;
 }
 
+.number-shopping-books{
+  background: rgb(255, 53, 58);
+  color: rgb(255, 255, 255);
+  font-family: Montserrat;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 12px;
+  letter-spacing: 0%;
+  text-align: left;
+  text-transform: capitalize;
+
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  position: absolute;
+  top: 8px;
+  left: 111px;
+  text-align: center;
+}
+
 /* MAIN */
 
 .main-section-banner-box-one {

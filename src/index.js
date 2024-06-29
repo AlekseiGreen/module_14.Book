@@ -278,8 +278,9 @@ document.addEventListener('click', (event)=>{
   // main-section-book-shop-buy
   if(event.target.classList.contains('main-section-book-shop-buy')){
     let dataID = event.target.getAttribute('data-id');
+    // Поиск в массиве id
     let findId = G_localStorage.indexOf(dataID);
-    // includes простой поиск true/false
+    //
     if(findId != -1){
       console.log('True=', findId);
       G_localStorage.splice(findId, 1);
@@ -291,10 +292,17 @@ document.addEventListener('click', (event)=>{
     console.log(G_localStorage);
     G_numberShoppingBooks = G_localStorage.length;
     console.log(G_numberShoppingBooks);
-    headerIcon.innerHTML = `
+    if(G_numberShoppingBooks != 0){
+      headerIcon.innerHTML = `
       <img src="${G_Icons}" alt="IMG" />
-      <div>Number=${G_numberShoppingBooks}</div>
+      <div class="number-shopping-books">${G_numberShoppingBooks}</div>
     `;
+    } else{
+      headerIcon.innerHTML = `
+      <img src="${G_Icons}" alt="IMG" />
+    `;
+    }
+    
   }
 
   console.log(event.target);
