@@ -1,4 +1,5 @@
 import './styles.css';
+import './style_scss.scss';
 import G_StarSilver from './img/StarSilver.svg';
 import G_StarYellow from './img/StarYellow.svg';
 import G_Icons from './img/icons.svg';
@@ -7,6 +8,8 @@ import G_BannerTwo from './img/banner_two.svg';
 import G_BannerThree from './img/banner_three.svg';
 import arrowOneImg from './img/arrow.svg';
 
+console.log('START');
+
 
 // Глобальные переменные
 let j=0;
@@ -14,15 +17,8 @@ let G_initQuantityBooks = 6;
 let G_quantityBooks = G_initQuantityBooks;
 let G_addQuantityBooks = 6;
 let G_numberShoppingBooks;
-// Информация о книгах, добавленных в корзину
-let G_localStorage = [];
+let G_localStorage = []; // Информация о книгах, добавленных в корзину
 // end Глобальные переменные
-
-
-console.log('START');
-
-const siteHeader = document.querySelector(".siteHeader");
-// siteHeader.style.
 
 
 const parentPoints = document.querySelector('.main-section-banner-dots');

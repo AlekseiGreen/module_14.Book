@@ -16,6 +16,11 @@ module.exports = {
         use: ['style-loader', 'css-loader'], // Загрузчики, используемые для обработки CSS-файлов
       },
       {
+        test: /\.s[a|c]ss$/i,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+        // loader: 'style!css!sass'
+      },
+      {
         test: /\.(png|svg|jpg|gif)$/, // Группировка для регулярных выражений для обработки файлов с расширением .png
         use: ['file-loader'], // Загрузчики, используемые для обработки PNG-файлов
       }
