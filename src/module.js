@@ -65,7 +65,7 @@ function descript(in_i, in_categoryShop) {
 function price(in_i, in_categoryShop){
     let priceDiv = '';
     if(in_categoryShop.items[in_i].saleInfo.retailPrice == undefined){
-        priceDiv += '<div>&#8381 нет данных</div>'
+        priceDiv += '<div>&#8381 NOT_FOR_SALE</div>'
     } else{
         priceDiv += `<div>&#8381 ${in_categoryShop.items[in_i].saleInfo.retailPrice.amount}</div>`;
     }
