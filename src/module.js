@@ -125,5 +125,41 @@ function getCardProductHTML(сardProduct, in_StarSilver, in_StarYellow) {
       return сardProductHTML;
   }
 
+// Формирование списка категорий и карточки товара
+function getCategoryListHTML(in_categoryList, in_j, in_quantityBooks, in_bookShop, in_StarSilver, in_StarYellow) {
 
-export {getBookID, initPointSlider, changeSliderImage, stars, review, descript, price, getBooks, getRequestURL, getCardProductHTML};
+    let reqURL = getRequestURL(in_categoryList, in_j, in_quantityBooks);
+
+    let categoryListHTML = "";
+    // список категорий
+    for(let i=0; i<in_categoryList.length; i++){
+        let catalogDotActive = `${i==in_j? '<div class="main-section-book-box__title-category-active-ellipse"></div>':''}`;
+        let catalogActive = `<div class="main-section-book-box__title-category ${i == in_j ? "main-section-book-box__title-category-active": ""}" data-index="${i}">${in_categoryList[i]}</div>`;
+        categoryListHTML += catalogDotActive + catalogActive;
+    }
+    getBooks('GET', reqURL)
+        .then(catalogyShop=>{
+        // Вывод Ячейки книг
+        in_bookShop.innerHTML = getCardProductHTML(catalogyShop, in_StarSilver, in_StarYellow);
+        })
+        .catch(error => {
+        console.error(error);
+    });
+
+    return [categoryListHTML];
+}
+
+// Функция выделяет жирным шрифтом выбранную строку
+function clickCategory(in_i, in_categoryMenu, in_category, in_quantityBooks, in_bookShop, in_StarSilver, in_StarYellow) {
+    in_categoryMenu.innerHTML =  getCategoryListHTML(in_category, in_i, in_quantityBooks, in_bookShop, in_StarSilver, in_StarYellow);
+}
+
+// Загрузить больше книг
+function loadMore(in_categoryMenu, in_quantityBooks, in_addQuantityBooks, in_category, in_j, in_bookShop, in_StarSilver, in_StarYellow) {
+    in_categoryMenu.innerHTML =  getCategoryListHTML(in_category, in_j, in_quantityBooks, in_bookShop, in_StarSilver, in_StarYellow);
+    let out_addQuantityBooks = in_addQuantityBooks;
+    return out_addQuantityBooks;
+}
+
+
+export {getBookID, initPointSlider, changeSliderImage, stars, review, descript, price, getBooks, getRequestURL, getCardProductHTML, getCategoryListHTML, clickCategory, loadMore};

@@ -7,18 +7,17 @@ import G_BannerOne from './img/banner_one.svg';
 import G_BannerTwo from './img/banner_two.svg';
 import G_BannerThree from './img/banner_three.svg';
 import arrowOneImg from './img/arrow.svg';
-import {getBookID, initPointSlider, changeSliderImage, stars, review, descript, price, getBooks, getRequestURL, getCardProductHTML} from './module';
+import {getBookID, initPointSlider, changeSliderImage, stars, review, descript, price, getBooks, getRequestURL, getCardProductHTML, getCategoryListHTML, clickCategory, loadMore} from './module';
 
 
 // Глобальные переменные
-let j=0;
+let G_j=0;
 let G_initQuantityBooks = 6;
 let G_quantityBooks = G_initQuantityBooks;
 let G_addQuantityBooks = 6;
 let G_numberShoppingBooks;
 let G_localStorage = []; // Информация о книгах, добавленных в корзину
 // end Глобальные переменные
-
 
 const parentPoints = document.querySelector('.main-section-banner-dots');
 const headerIcon = document.querySelector(".header-img-icons");
@@ -42,13 +41,13 @@ const imgBase = [
 initPointSlider(imgBase, parentPoints);
 
 let index = 0;
-const banner_img = document.querySelector(".banner-img");
-banner_img.innerHTML = `<img src=`+imgBase[0].image+` alt="IMG"/>`;
+const bannerImg = document.querySelector(".banner-img");
+bannerImg.innerHTML = `<img src=`+imgBase[0].image+` alt="IMG"/>`;
 
 // Перелистывание баннера каждые 5 секунд
 setInterval(function() {
     if(index>2){index=0};
-    changeSliderImage(banner_img, imgBase, index);
+    changeSliderImage(bannerImg, imgBase, index);
     index++;
 }, 5000);
 
@@ -64,51 +63,12 @@ const category = ['Architecture', 'Art & Fashion', 'Biography', 'Business', 'Dra
 // Создание Ячейки книг
 const bookShop = document.querySelector(".main-section-book-shop");
 
-
 // Объявление Список жанров
-const list_categories = document.querySelector(".main-section-book-box__title");
+const categoryMenu = document.querySelector(".main-section-book-box__title");
 
-// Формирование списка категорий
-function getCategoryListHTML(in_categoryList, in_j, in_quantityBooks) {
-  
-  let reqURL = getRequestURL(in_categoryList, in_j, in_quantityBooks);
-  
-  let categoryListHTML = "";
-  // список категорий
-  for(let i=0; i<in_categoryList.length; i++){
-    let catalogDotActive = `${i==in_j? '<div class="main-section-book-box__title-category-active-ellipse"></div>':''}`;
-    let catalogActive = `<div class="main-section-book-box__title-category ${i == in_j ? "main-section-book-box__title-category-active": ""}" data-index="${i}">${in_categoryList[i]}</div>`;
-    categoryListHTML += catalogDotActive + catalogActive;
-  }
-  getBooks('GET', reqURL)
-    .then(catalogyShop=>{
-      // Вывод Ячейки книг
-      bookShop.innerHTML = getCardProductHTML(catalogyShop, G_StarSilver, G_StarYellow);
-    })
-    .catch(error => {
-      console.error(error);
-  });
-  
-  return [categoryListHTML];
-}
+// Первый запуск. Формирование списка категорий и карточек товара
+categoryMenu.innerHTML =  getCategoryListHTML(category, G_j, G_quantityBooks, bookShop, G_StarSilver, G_StarYellow);
 
-
-// Первый запуск
-list_categories.innerHTML =  getCategoryListHTML(category, j, G_quantityBooks);
-
-// Функция выделяет жирным шрифтом выбранную строку
-function clickCategory(i) {
-    // Глобальная переменная j
-    j = i;
-    list_categories.innerHTML =  getCategoryListHTML(category, j, G_quantityBooks);
-}
-
-// Загрузить больше книг
-function loadMore(in_quantityBooks, in_addQuantityBooks) {
-  list_categories.innerHTML =  getCategoryListHTML(category, j, in_quantityBooks);
-  let out_addQuantityBooks = in_addQuantityBooks;
-  return out_addQuantityBooks;
-}
 
 /* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
 // Клик-событие
@@ -117,21 +77,22 @@ document.addEventListener('click', (event)=>{
   // Три точки
   if(event.target.classList.contains('banner-img-dot')){
     const index = event.target.getAttribute('data-index');
-    changeSliderImage(banner_img, imgBase, index);
+    changeSliderImage(bannerImg, imgBase, index);
   }
 
   //Список категорий
   if(event.target.classList.contains('main-section-book-box__title-category')){
     let index = event.target.getAttribute('data-index');
     G_quantityBooks = G_initQuantityBooks;
-    clickCategory(index);
+    clickCategory(index, categoryMenu, category, G_quantityBooks, bookShop, G_StarSilver, G_StarYellow);
+    G_j = index;
   }
 
   // Загрузить больше книг
   if(event.target.classList.contains('main-section-book-shop-button')){
     console.log("number_1 =", G_quantityBooks);
     console.log("number_2 =", G_addQuantityBooks);
-    G_quantityBooks = G_quantityBooks + loadMore(G_quantityBooks + G_addQuantityBooks, G_addQuantityBooks);
+    G_quantityBooks = G_quantityBooks + loadMore(categoryMenu, G_quantityBooks + G_addQuantityBooks, G_addQuantityBooks, category, G_j, bookShop, G_StarSilver, G_StarYellow);
   }
 
   // main-section-book-shop-buy
