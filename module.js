@@ -149,5 +149,17 @@ function getCategoryListHTML(in_categoryList, in_j, in_quantityBooks, in_bookSho
     return [categoryListHTML];
 }
 
+// Функция выделяет жирным шрифтом выбранную строку
+function clickCategory(in_i, in_categoryMenu, in_category, in_quantityBooks, in_bookShop, in_StarSilver, in_StarYellow) {
+    in_categoryMenu.innerHTML =  getCategoryListHTML(in_category, in_i, in_quantityBooks, in_bookShop, in_StarSilver, in_StarYellow);
+}
 
-export {getBookID, initPointSlider, changeSliderImage, stars, review, descript, price, getBooks, getRequestURL, getCardProductHTML, getCategoryListHTML};
+// Загрузить больше книг
+function loadMore(in_categoryMenu, in_quantityBooks, in_addQuantityBooks, in_category, in_j, in_bookShop, in_StarSilver, in_StarYellow) {
+    in_categoryMenu.innerHTML =  getCategoryListHTML(in_category, in_j, in_quantityBooks, in_bookShop, in_StarSilver, in_StarYellow);
+    let out_addQuantityBooks = in_addQuantityBooks;
+    return out_addQuantityBooks;
+  }
+
+
+export {getBookID, initPointSlider, changeSliderImage, stars, review, descript, price, getBooks, getRequestURL, getCardProductHTML, getCategoryListHTML, clickCategory, loadMore};
