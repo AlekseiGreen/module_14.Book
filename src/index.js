@@ -7,7 +7,7 @@ import G_BannerOne from './img/banner_one.svg';
 import G_BannerTwo from './img/banner_two.svg';
 import G_BannerThree from './img/banner_three.svg';
 import arrowOneImg from './img/arrow.svg';
-import {getBookID, initPointSlider, changeSliderImage, stars, review, descript, price} from './module';
+import {getBookID, initPointSlider, changeSliderImage, stars, review, descript, price, getBooks} from './module';
 
 
 // Глобальные переменные
@@ -60,27 +60,6 @@ arrowTwo.innerHTML = `<img src="${arrowOneImg}" alt="arrowTwo"/>`;
 
 //categoryList
 const category = ['Architecture', 'Art & Fashion', 'Biography', 'Business', 'Drama', 'Fiction', 'Food & Drink', 'Health & Wellbeing', 'History & Politics', 'Humor', 'Psychology', 'Technology', 'Travel & Maps'];
-
-// Выполнение запроса googlebooks key API
-function getBooks(method, url){
-  return new Promise((resolve, reject)=>{
-    let xhr = new XMLHttpRequest();
-    xhr.open(method, url);
-    xhr.responseType = 'json';
-
-    xhr.onload = ()=> {
-      if(xhr.status>=400){
-        reject(xhr.response);
-        console.log('Before OFF');
-      } else{
-        resolve(xhr.response);
-      }
-      
-    }
-
-    xhr.send();
-  });
-}// end Выполнение запроса googlebooks key API
 
 // Создание Ячейки книг
 const bookShop = document.querySelector(".main-section-book-shop");
@@ -220,5 +199,5 @@ document.addEventListener('click', (event)=>{
   }
 
   console.log(event.target);
-});// end Клик-событие
+});
 /* vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv */

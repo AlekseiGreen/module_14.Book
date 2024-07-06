@@ -72,6 +72,24 @@ function price(in_i, in_categoryShop){
     return priceDiv;
 }
 
+// Выполнение запроса googlebooks key API
+function getBooks(method, url){
+    return new Promise((resolve, reject)=>{
+      let xhr = new XMLHttpRequest();
+      xhr.open(method, url);
+      xhr.responseType = 'json';
+      xhr.onload = ()=> {
+        if(xhr.status>=400){
+          reject(xhr.response);
+          console.log('Before OFF');
+        } else{
+          resolve(xhr.response);
+        }
+      }
+      xhr.send();
+    });
+  }
 
-export {getBookID, initPointSlider, changeSliderImage, stars, review, descript, price};
+
+export {getBookID, initPointSlider, changeSliderImage, stars, review, descript, price, getBooks};
 
