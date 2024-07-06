@@ -50,6 +50,7 @@ function review(in_i, in_categoryShop) {
     return reviewCount;
 }
 
+// Описание
 function descript(in_i, in_categoryShop) {
     let descriptDiv = ``;
     if(in_categoryShop.items[in_i].volumeInfo.description == undefined) {
@@ -60,6 +61,17 @@ function descript(in_i, in_categoryShop) {
     return descriptDiv;
 }
 
+// Цена
+function price(in_i, in_categoryShop){
+    let priceDiv = '';
+    if(in_categoryShop.items[in_i].saleInfo.retailPrice == undefined){
+        priceDiv += '<div>&#8381 нет данных</div>'
+    } else{
+        priceDiv += `<div>&#8381 ${in_categoryShop.items[in_i].saleInfo.retailPrice.amount}</div>`;
+    }
+    return priceDiv;
+}
 
-export {getBookID, initPointSlider, changeSliderImage, stars, review, descript};
+
+export {getBookID, initPointSlider, changeSliderImage, stars, review, descript, price};
 
