@@ -7,7 +7,7 @@ import G_BannerOne from './img/banner_one.svg';
 import G_BannerTwo from './img/banner_two.svg';
 import G_BannerThree from './img/banner_three.svg';
 import arrowOneImg from './img/arrow.svg';
-import {getBookID, initPointSlider, changeSliderImage, stars} from './module';
+import {getBookID, initPointSlider, changeSliderImage, stars, review} from './module';
 
 console.log('START');
 
@@ -60,12 +60,8 @@ arrowOne.innerHTML = `<img src="${arrowOneImg}" alt="arrowOne"/>`;
 const arrowTwo = document.querySelector(".main-section-banner-box-two__arrow");
 arrowTwo.innerHTML = `<img src="${arrowOneImg}" alt="arrowTwo"/>`;
 
-
-
-
 //categoryList
 const category = ['Architecture', 'Art & Fashion', 'Biography', 'Business', 'Drama', 'Fiction', 'Food & Drink', 'Health & Wellbeing', 'History & Politics', 'Humor', 'Psychology', 'Technology', 'Travel & Maps'];
-
 
 // Выполнение запроса googlebooks key API
 function getBooks(method, url){
@@ -151,22 +147,12 @@ function loadMore(in_quantityBooks, in_addQuantityBooks) {
   return out_addQuantityBooks;
 }//end Загрузить больше книг
 
-function review(i, categoryShop) {
-  let count;
-  let reviewCount = ``;
-  if(categoryShop.items[i].volumeInfo.ratingCount == undefined) {
-    count = 0;
-    reviewCount += `<div>${count} review</div>`
-  }
-  return reviewCount;
-}
-
 function descript(i, categoryShop) {
   let descriptDiv = ``;
   if(categoryShop.items[i].volumeInfo.description == undefined) {
-    descriptDiv += `<div>${descriptDiv} review1</div>`
+    descriptDiv += `<div>${descriptDiv}</div>`
   } else{
-    descriptDiv += `<div>${categoryShop.items[i].volumeInfo.description.substring(0, 80)} review</div>`
+    descriptDiv += `<div>${categoryShop.items[i].volumeInfo.description.substring(0, 80)}</div>`
   }
   return descriptDiv;
 }

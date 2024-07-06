@@ -39,6 +39,17 @@ function stars(in_i, in_categoryShop, in_StarSilver, in_StarYellow) {
     return starIntro;
 }
 
+// Обзор
+function review(in_i, in_categoryShop) {
+    let count;
+    let reviewCount = ``;
+    if(in_categoryShop.items[in_i].volumeInfo.ratingCount == undefined) {
+      count = 0;
+      reviewCount += `<div>${count} review</div>`
+    }
+    return reviewCount;
+  }
 
-export {getBookID, initPointSlider, changeSliderImage, stars};
+
+export {getBookID, initPointSlider, changeSliderImage, stars, review};
 
