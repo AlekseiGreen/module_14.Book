@@ -90,6 +90,20 @@ function getBooks(method, url){
     });
   }
 
+// Google book API
+function getRequestURL(in_category, in_j, in_quantityBooks){
+  let requestURL1 = 'https://www.googleapis.com/books/v1/volumes?q="subject:';
+  let requestURL2;
+  
+  requestURL2 = in_category[in_j];
+  
+  let requestURL3 = '"&key=AIzaSyC2XD5L6WHFV8Mtjhs0yU0aDr7B97i0tk0&printType=books&startIndex=0&maxResults=';
+  let requestURL4 = in_quantityBooks;
+  let requestURL5 = '&langRestrict=en'; 
+  let requestURL = requestURL1 + requestURL2 + requestURL3 + requestURL4 + requestURL5;
+  return requestURL;
+}
 
-export {getBookID, initPointSlider, changeSliderImage, stars, review, descript, price, getBooks};
+
+export {getBookID, initPointSlider, changeSliderImage, stars, review, descript, price, getBooks, getRequestURL};
 

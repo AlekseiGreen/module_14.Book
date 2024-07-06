@@ -7,7 +7,7 @@ import G_BannerOne from './img/banner_one.svg';
 import G_BannerTwo from './img/banner_two.svg';
 import G_BannerThree from './img/banner_three.svg';
 import arrowOneImg from './img/arrow.svg';
-import {getBookID, initPointSlider, changeSliderImage, stars, review, descript, price, getBooks} from './module';
+import {getBookID, initPointSlider, changeSliderImage, stars, review, descript, price, getBooks, getRequestURL} from './module';
 
 
 // Глобальные переменные
@@ -58,7 +58,7 @@ arrowOne.innerHTML = `<img src="${arrowOneImg}" alt="arrowOne"/>`;
 const arrowTwo = document.querySelector(".main-section-banner-box-two__arrow");
 arrowTwo.innerHTML = `<img src="${arrowOneImg}" alt="arrowTwo"/>`;
 
-//categoryList
+// Категории книг
 const category = ['Architecture', 'Art & Fashion', 'Biography', 'Business', 'Drama', 'Fiction', 'Food & Drink', 'Health & Wellbeing', 'History & Politics', 'Humor', 'Psychology', 'Technology', 'Travel & Maps'];
 
 // Создание Ячейки книг
@@ -68,24 +68,10 @@ const bookShop = document.querySelector(".main-section-book-shop");
 // Объявление Список жанров
 const list_categories = document.querySelector(".main-section-book-box__title");
 
-// Google book API
-function getRequestURL(in_quantityBooks){
-  let requestURL1 = 'https://www.googleapis.com/books/v1/volumes?q="subject:';
-  let requestURL2;
-  
-  requestURL2 = category[j];
-  
-  let requestURL3 = '"&key=AIzaSyC2XD5L6WHFV8Mtjhs0yU0aDr7B97i0tk0&printType=books&startIndex=0&maxResults=';
-  let requestURL4 = in_quantityBooks;
-  let requestURL5 = '&langRestrict=en';
-  let requestURL = requestURL1 + requestURL2 + requestURL3 + requestURL4 + requestURL5;
-  return requestURL;
-}// end Google book API
-
 // Формирование списка категорий
 function getCategoryListHTML(in_categoryList, in_quantityBooks) {
   
-  let reqURL = getRequestURL(in_quantityBooks);
+  let reqURL = getRequestURL(in_categoryList, j, in_quantityBooks);
   
   let categoryListHTML = "";
   // список категорий
@@ -104,7 +90,7 @@ function getCategoryListHTML(in_categoryList, in_quantityBooks) {
   });
   
   return [categoryListHTML];
-}// end Формирование списка категорий
+}
 
 
 // Первый запуск
@@ -115,14 +101,14 @@ function clickCategory(i) {
     // Глобальная переменная j
     j = i;
     list_categories.innerHTML =  getCategoryListHTML(category, G_quantityBooks);
-}//end Функция выделяет жирным шрифтом выбранную строку
+}
 
 // Загрузить больше книг
 function loadMore(in_quantityBooks, in_addQuantityBooks) {
   list_categories.innerHTML =  getCategoryListHTML(category, in_quantityBooks);
   let out_addQuantityBooks = in_addQuantityBooks;
   return out_addQuantityBooks;
-}//end Загрузить больше книг
+}
 
 function getCategoryShopHTML(categoryShop) {
   let categoryShopHTML = "";
