@@ -7,7 +7,7 @@ import G_BannerOne from './img/banner_one.svg';
 import G_BannerTwo from './img/banner_two.svg';
 import G_BannerThree from './img/banner_three.svg';
 import arrowOneImg from './img/arrow.svg';
-import {getBookID, initPointSlider, changeSliderImage, stars, review} from './module';
+import {getBookID, initPointSlider, changeSliderImage, stars, review, descript} from './module';
 
 console.log('START');
 
@@ -147,15 +147,15 @@ function loadMore(in_quantityBooks, in_addQuantityBooks) {
   return out_addQuantityBooks;
 }//end Загрузить больше книг
 
-function descript(i, categoryShop) {
-  let descriptDiv = ``;
-  if(categoryShop.items[i].volumeInfo.description == undefined) {
-    descriptDiv += `<div>${descriptDiv}</div>`
-  } else{
-    descriptDiv += `<div>${categoryShop.items[i].volumeInfo.description.substring(0, 80)}</div>`
-  }
-  return descriptDiv;
-}
+// function descript(i, categoryShop) {
+//   let descriptDiv = ``;
+//   if(categoryShop.items[i].volumeInfo.description == undefined) {
+//     descriptDiv += `<div>${descriptDiv}</div>`
+//   } else{
+//     descriptDiv += `<div>${categoryShop.items[i].volumeInfo.description.substring(0, 80)}</div>`
+//   }
+//   return descriptDiv;
+// }
 
 function price(i, categoryShop){
   let priceDiv = '';

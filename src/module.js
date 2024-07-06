@@ -48,8 +48,18 @@ function review(in_i, in_categoryShop) {
       reviewCount += `<div>${count} review</div>`
     }
     return reviewCount;
-  }
+}
+
+function descript(in_i, in_categoryShop) {
+    let descriptDiv = ``;
+    if(in_categoryShop.items[in_i].volumeInfo.description == undefined) {
+        descriptDiv += `<div>${descriptDiv}</div>`;
+    } else{
+        descriptDiv += `<div>${in_categoryShop.items[in_i].volumeInfo.description.substring(0, 80)}</div>`;
+    }
+    return descriptDiv;
+}
 
 
-export {getBookID, initPointSlider, changeSliderImage, stars, review};
+export {getBookID, initPointSlider, changeSliderImage, stars, review, descript};
 
