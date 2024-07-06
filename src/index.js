@@ -7,6 +7,7 @@ import G_BannerOne from './img/banner_one.svg';
 import G_BannerTwo from './img/banner_two.svg';
 import G_BannerThree from './img/banner_three.svg';
 import arrowOneImg from './img/arrow.svg';
+import {getBookID} from './module';
 
 console.log('START');
 
@@ -78,7 +79,7 @@ arrowTwo.innerHTML = `<img src="${arrowOneImg}" alt="arrowTwo"/>`;
 
 
 //categoryList
-const category = ['Architecture', 'Art & Fashion', 'Biography', 'Business', 'Crafts & Hobbies', 'Drama', 'Fiction', 'Food & Drink', 'Health & Wellbeing', 'History & Politics', 'Humor', 'Poetry', 'Psychology', 'Sience', 'Technology', 'Travel & Maps'];
+const category = ['Architecture', 'Art & Fashion', 'Biography', 'Business', 'Drama', 'Fiction', 'Food & Drink', 'Health & Wellbeing', 'History & Politics', 'Humor', 'Psychology', 'Technology', 'Travel & Maps'];
 
 
 // Выполнение запроса googlebooks key API
@@ -221,10 +222,10 @@ function price(i, categoryShop){
   return priceDiv;
 }
 
-// Получение и формирование ID
-function getBookID(id){
-  return id;
-}
+// // Получение и формирование ID
+// function getBookID(id){
+//   return id;
+// }
 
 
 function getCategoryShopHTML(categoryShop) {
