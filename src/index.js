@@ -7,7 +7,7 @@ import G_BannerOne from './img/banner_one.svg';
 import G_BannerTwo from './img/banner_two.svg';
 import G_BannerThree from './img/banner_three.svg';
 import arrowOneImg from './img/arrow.svg';
-import {getBookID, initPointSlider, changeSliderImage, stars, review, descript, price, getBooks, getRequestURL} from './module';
+import {getBookID, initPointSlider, changeSliderImage, stars, review, descript, price, getBooks, getRequestURL, getCardProductHTML} from './module';
 
 
 // Глобальные переменные
@@ -83,7 +83,7 @@ function getCategoryListHTML(in_categoryList, in_quantityBooks) {
   getBooks('GET', reqURL)
     .then(catalogyShop=>{
       // Вывод Ячейки книг
-      bookShop.innerHTML = getCategoryShopHTML(catalogyShop);
+      bookShop.innerHTML = getCardProductHTML(catalogyShop, G_StarSilver, G_StarYellow);
     })
     .catch(error => {
       console.error(error);
@@ -110,25 +110,26 @@ function loadMore(in_quantityBooks, in_addQuantityBooks) {
   return out_addQuantityBooks;
 }
 
-function getCategoryShopHTML(categoryShop) {
-  let categoryShopHTML = "";
-    for(let i=0; i<categoryShop.items.length; i++) {
-        categoryShopHTML += `
-        <div class="main-section-book-shop__more">
-            <div class="main-section-book-shop-cover"><img src="${categoryShop.items[i].volumeInfo.imageLinks.thumbnail}" style="background-size: cover;" alt="imgBook"/></div>
-            <div class="main-section-book-shop-autor">${categoryShop.items[i].volumeInfo.authors[0]}</div>
-            <div class="main-section-book-shop-title">${categoryShop.items[i].volumeInfo.title.substring(0, 15)}</div>
-            <div class="main-section-book-shop-star">${stars(i, categoryShop, G_StarSilver, G_StarYellow)}</div>
-            <div class="main-section-book-shop-review">${review(i, categoryShop)}</div>
-            <div class="main-section-book-shop-description">${descript(i, categoryShop)}</div>
-            <div class="main-section-book-shop-price">${price(i, categoryShop)}</div>
-            <div class="main-section-book-shop-buy" data-id="${getBookID(categoryShop.items[i].volumeInfo.title.substring(0, 15))}">buy now</div>
-        </div>`;
+// // CardProduct карточка товара
+// function getCardProductHTML(сardProduct) {
+//   let сardProductHTML = "";
+//     for(let i=0; i<сardProduct.items.length; i++) {
+//       сardProductHTML += `
+//         <div class="main-section-book-shop__more">
+//             <div class="main-section-book-shop-cover"><img src="${сardProduct.items[i].volumeInfo.imageLinks.thumbnail}" style="background-size: cover;" alt="imgBook"/></div>
+//             <div class="main-section-book-shop-autor">${сardProduct.items[i].volumeInfo.authors[0]}</div>
+//             <div class="main-section-book-shop-title">${сardProduct.items[i].volumeInfo.title.substring(0, 15)}</div>
+//             <div class="main-section-book-shop-star">${stars(i, сardProduct, G_StarSilver, G_StarYellow)}</div>
+//             <div class="main-section-book-shop-review">${review(i, сardProduct)}</div>
+//             <div class="main-section-book-shop-description">${descript(i, сardProduct)}</div>
+//             <div class="main-section-book-shop-price">${price(i, сardProduct)}</div>
+//             <div class="main-section-book-shop-buy" data-id="${getBookID(сardProduct.items[i].volumeInfo.title.substring(0, 15))}">buy now</div>
+//         </div>`;
 
-    }
-    categoryShopHTML += `<div class="main-section-book-shop-button">LOAD MORE</div>`;
-    return categoryShopHTML;
-}
+//     }
+//     сardProductHTML += `<div class="main-section-book-shop-button">LOAD MORE</div>`;
+//     return сardProductHTML;
+// }
 
 /* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
 // Клик-событие

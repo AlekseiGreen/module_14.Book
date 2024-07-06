@@ -104,6 +104,26 @@ function getRequestURL(in_category, in_j, in_quantityBooks){
   return requestURL;
 }
 
+// CardProduct карточка товара
+function getCardProductHTML(сardProduct, in_StarSilver, in_StarYellow) {
+    let сardProductHTML = "";
+      for(let i=0; i<сardProduct.items.length; i++) {
+        сardProductHTML += `
+          <div class="main-section-book-shop__more">
+              <div class="main-section-book-shop-cover"><img src="${сardProduct.items[i].volumeInfo.imageLinks.thumbnail}" style="background-size: cover;" alt="imgBook"/></div>
+              <div class="main-section-book-shop-autor">${сardProduct.items[i].volumeInfo.authors[0]}</div>
+              <div class="main-section-book-shop-title">${сardProduct.items[i].volumeInfo.title.substring(0, 15)}</div>
+              <div class="main-section-book-shop-star">${stars(i, сardProduct, in_StarSilver, in_StarYellow)}</div>
+              <div class="main-section-book-shop-review">${review(i, сardProduct)}</div>
+              <div class="main-section-book-shop-description">${descript(i, сardProduct)}</div>
+              <div class="main-section-book-shop-price">${price(i, сardProduct)}</div>
+              <div class="main-section-book-shop-buy" data-id="${getBookID(сardProduct.items[i].volumeInfo.title.substring(0, 15))}">buy now</div>
+          </div>`;
+  
+      }
+      сardProductHTML += `<div class="main-section-book-shop-button">LOAD MORE</div>`;
+      return сardProductHTML;
+  }
 
-export {getBookID, initPointSlider, changeSliderImage, stars, review, descript, price, getBooks, getRequestURL};
 
+export {getBookID, initPointSlider, changeSliderImage, stars, review, descript, price, getBooks, getRequestURL, getCardProductHTML};
