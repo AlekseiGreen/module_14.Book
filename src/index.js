@@ -7,7 +7,7 @@ import G_BannerOne from './img/banner_one.svg';
 import G_BannerTwo from './img/banner_two.svg';
 import G_BannerThree from './img/banner_three.svg';
 import arrowOneImg from './img/arrow.svg';
-import {getBookID, initPointSlider, } from './module';
+import {getBookID, initPointSlider, changeSliderImage} from './module';
 
 console.log('START');
 
@@ -40,20 +40,12 @@ const imgBase = [
     },
 ]
 
-
-// // Инициализация точки
-// function initPointSlider(){
-//   imgBase.forEach((img, index) => {
-//     parentPoints.innerHTML += `<div class="banner-img-dot ${index === 0 ? 'active': ''}" data-index="${index}"></div>`;
-//   })
-// }// end Инициализация точки
-
-// Слайдер главной картинки
-function changeSliderImage(index){
-  banner_img.innerHTML = `<img src=`+imgBase[index].image+` alt="IMG"/>`;
-  document.querySelector(`.banner-img-dot.active`).classList.remove('active');
-  document.querySelector(`.banner-img-dot[data-index="${index}"]`).classList.add('active');
-}// end Слайдер главной картинки
+// // Слайдер главной картинки
+// function changeSliderImage(index){
+//   banner_img.innerHTML = `<img src=`+imgBase[index].image+` alt="IMG"/>`;
+//   document.querySelector(`.banner-img-dot.active`).classList.remove('active');
+//   document.querySelector(`.banner-img-dot[data-index="${index}"]`).classList.add('active');
+// }// end Слайдер главной картинки
 
 // Инициализация баннера
 initPointSlider(imgBase, parentPoints);
@@ -65,7 +57,7 @@ banner_img.innerHTML = `<img src=`+imgBase[0].image+` alt="IMG"/>`;
 // Перелистывание баннера каждые 5 секунд
 setInterval(function() {
     if(index>2){index=0};
-    changeSliderImage(index);
+    changeSliderImage(banner_img, imgBase, index);
     index++;
 }, 5000);
 
@@ -250,7 +242,7 @@ document.addEventListener('click', (event)=>{
   // Три точки
   if(event.target.classList.contains('banner-img-dot')){
     const index = event.target.getAttribute('data-index');
-    changeSliderImage(index);
+    changeSliderImage(banner_img, imgBase, index);
   }
 
   //Список категорий

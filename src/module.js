@@ -10,6 +10,13 @@ function initPointSlider(in_imgBase, in_parentPoints){
     })
 }
 
+// Слайдер главной картинки
+function changeSliderImage(in_bannerImg, in_imgBase, in_index){
+    in_bannerImg.innerHTML = `<img src=`+in_imgBase[in_index].image+` alt="IMG"/>`;
+    document.querySelector(`.banner-img-dot.active`).classList.remove('active');
+    document.querySelector(`.banner-img-dot[data-index="${in_index}"]`).classList.add('active');
+}
 
 
-export {getBookID, initPointSlider};
+export {getBookID, initPointSlider, changeSliderImage};
+
