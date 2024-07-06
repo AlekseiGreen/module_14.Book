@@ -69,15 +69,15 @@ const bookShop = document.querySelector(".main-section-book-shop");
 const list_categories = document.querySelector(".main-section-book-box__title");
 
 // Формирование списка категорий
-function getCategoryListHTML(in_categoryList, in_quantityBooks) {
+function getCategoryListHTML(in_categoryList, in_j, in_quantityBooks) {
   
-  let reqURL = getRequestURL(in_categoryList, j, in_quantityBooks);
+  let reqURL = getRequestURL(in_categoryList, in_j, in_quantityBooks);
   
   let categoryListHTML = "";
   // список категорий
   for(let i=0; i<in_categoryList.length; i++){
-    let catalogDotActive = `${i==j? '<div class="main-section-book-box__title-category-active-ellipse"></div>':''}`;
-    let catalogActive = `<div class="main-section-book-box__title-category ${i == j ? "main-section-book-box__title-category-active": ""}" data-index="${i}">${in_categoryList[i]}</div>`;
+    let catalogDotActive = `${i==in_j? '<div class="main-section-book-box__title-category-active-ellipse"></div>':''}`;
+    let catalogActive = `<div class="main-section-book-box__title-category ${i == in_j ? "main-section-book-box__title-category-active": ""}" data-index="${i}">${in_categoryList[i]}</div>`;
     categoryListHTML += catalogDotActive + catalogActive;
   }
   getBooks('GET', reqURL)
@@ -94,42 +94,21 @@ function getCategoryListHTML(in_categoryList, in_quantityBooks) {
 
 
 // Первый запуск
-list_categories.innerHTML =  getCategoryListHTML(category, G_quantityBooks);
+list_categories.innerHTML =  getCategoryListHTML(category, j, G_quantityBooks);
 
 // Функция выделяет жирным шрифтом выбранную строку
 function clickCategory(i) {
     // Глобальная переменная j
     j = i;
-    list_categories.innerHTML =  getCategoryListHTML(category, G_quantityBooks);
+    list_categories.innerHTML =  getCategoryListHTML(category, j, G_quantityBooks);
 }
 
 // Загрузить больше книг
 function loadMore(in_quantityBooks, in_addQuantityBooks) {
-  list_categories.innerHTML =  getCategoryListHTML(category, in_quantityBooks);
+  list_categories.innerHTML =  getCategoryListHTML(category, j, in_quantityBooks);
   let out_addQuantityBooks = in_addQuantityBooks;
   return out_addQuantityBooks;
 }
-
-// // CardProduct карточка товара
-// function getCardProductHTML(сardProduct) {
-//   let сardProductHTML = "";
-//     for(let i=0; i<сardProduct.items.length; i++) {
-//       сardProductHTML += `
-//         <div class="main-section-book-shop__more">
-//             <div class="main-section-book-shop-cover"><img src="${сardProduct.items[i].volumeInfo.imageLinks.thumbnail}" style="background-size: cover;" alt="imgBook"/></div>
-//             <div class="main-section-book-shop-autor">${сardProduct.items[i].volumeInfo.authors[0]}</div>
-//             <div class="main-section-book-shop-title">${сardProduct.items[i].volumeInfo.title.substring(0, 15)}</div>
-//             <div class="main-section-book-shop-star">${stars(i, сardProduct, G_StarSilver, G_StarYellow)}</div>
-//             <div class="main-section-book-shop-review">${review(i, сardProduct)}</div>
-//             <div class="main-section-book-shop-description">${descript(i, сardProduct)}</div>
-//             <div class="main-section-book-shop-price">${price(i, сardProduct)}</div>
-//             <div class="main-section-book-shop-buy" data-id="${getBookID(сardProduct.items[i].volumeInfo.title.substring(0, 15))}">buy now</div>
-//         </div>`;
-
-//     }
-//     сardProductHTML += `<div class="main-section-book-shop-button">LOAD MORE</div>`;
-//     return сardProductHTML;
-// }
 
 /* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
 // Клик-событие
