@@ -17,6 +17,28 @@ function changeSliderImage(in_bannerImg, in_imgBase, in_index){
     document.querySelector(`.banner-img-dot[data-index="${in_index}"]`).classList.add('active');
 }
 
+// Оценка-звездочка
+function stars(in_i, in_categoryShop, in_StarSilver, in_StarYellow) {
+    let starIntro = ``;
+    let starSilver = `<img src="${in_StarSilver}"/>`;
+    let starYellow = `<img src="${in_StarYellow}"/>`;
+    if(in_categoryShop.items[in_i].volumeInfo.averageRating == undefined) {
+      for(let j=0; j < 5; j++){
+        starIntro += `<div class="main-section-book-shop-star-star">${starSilver}</div>`
+      }
+    } else {
+      for(let j=0; j < 5; j++){
+        if(j < in_categoryShop.items[in_i].volumeInfo.averageRating ) {
+          starIntro += `<div class="main-section-book-shop-star-star">${starYellow}</div>`
+        }
+        else {
+          starIntro += `<div class="main-section-book-shop-star-star">${starSilver}</div>`
+        }
+      }
+    }
+    return starIntro;
+}
 
-export {getBookID, initPointSlider, changeSliderImage};
+
+export {getBookID, initPointSlider, changeSliderImage, stars};
 

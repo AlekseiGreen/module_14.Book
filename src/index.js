@@ -7,7 +7,7 @@ import G_BannerOne from './img/banner_one.svg';
 import G_BannerTwo from './img/banner_two.svg';
 import G_BannerThree from './img/banner_three.svg';
 import arrowOneImg from './img/arrow.svg';
-import {getBookID, initPointSlider, changeSliderImage} from './module';
+import {getBookID, initPointSlider, changeSliderImage, stars} from './module';
 
 console.log('START');
 
@@ -39,13 +39,6 @@ const imgBase = [
         image: `${G_BannerThree}`
     },
 ]
-
-// // Слайдер главной картинки
-// function changeSliderImage(index){
-//   banner_img.innerHTML = `<img src=`+imgBase[index].image+` alt="IMG"/>`;
-//   document.querySelector(`.banner-img-dot.active`).classList.remove('active');
-//   document.querySelector(`.banner-img-dot[data-index="${index}"]`).classList.add('active');
-// }// end Слайдер главной картинки
 
 // Инициализация баннера
 initPointSlider(imgBase, parentPoints);
@@ -158,30 +151,6 @@ function loadMore(in_quantityBooks, in_addQuantityBooks) {
   return out_addQuantityBooks;
 }//end Загрузить больше книг
 
-// Оценка-звездочка
-function stars(i, categoryShop) {
-  let starIntro = ``;
-  let starSilver = `<img src="${G_StarSilver}"/>`;
-  let starYellow = `<img src="${G_StarYellow}"/>`;
-  if(categoryShop.items[i].volumeInfo.averageRating == undefined) {
-    for(let j=0; j < 5; j++){
-      starIntro += `<div class="main-section-book-shop-star-star">${starSilver}</div>`
-    }
-  } else {
-    for(let j=0; j < 5; j++){
-      if(j < categoryShop.items[i].volumeInfo.averageRating ) {
-        starIntro += `<div class="main-section-book-shop-star-star">${starYellow}</div>`
-      }
-      else {
-        starIntro += `<div class="main-section-book-shop-star-star">${starSilver}</div>`
-      }
-    }
-  }
-  return starIntro;
-}// end Оценка-звездочка
-
-
-
 function review(i, categoryShop) {
   let count;
   let reviewCount = ``;
@@ -223,7 +192,7 @@ function getCategoryShopHTML(categoryShop) {
             <div class="main-section-book-shop-cover"><img src="${categoryShop.items[i].volumeInfo.imageLinks.thumbnail}" style="background-size: cover;" alt="imgBook"/></div>
             <div class="main-section-book-shop-autor">${categoryShop.items[i].volumeInfo.authors[0]}</div>
             <div class="main-section-book-shop-title">${categoryShop.items[i].volumeInfo.title.substring(0, 15)}</div>
-            <div class="main-section-book-shop-star">${stars(i, categoryShop)}</div>
+            <div class="main-section-book-shop-star">${stars(i, categoryShop, G_StarSilver, G_StarYellow)}</div>
             <div class="main-section-book-shop-review">${review(i, categoryShop)}</div>
             <div class="main-section-book-shop-description">${descript(i, categoryShop)}</div>
             <div class="main-section-book-shop-price">${price(i, categoryShop)}</div>
