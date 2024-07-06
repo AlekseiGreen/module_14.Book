@@ -7,7 +7,7 @@ import G_BannerOne from './img/banner_one.svg';
 import G_BannerTwo from './img/banner_two.svg';
 import G_BannerThree from './img/banner_three.svg';
 import arrowOneImg from './img/arrow.svg';
-import {getBookID} from './module';
+import {getBookID, initPointSlider, } from './module';
 
 console.log('START');
 
@@ -25,7 +25,7 @@ let G_localStorage = []; // Информация о книгах, добавле
 const parentPoints = document.querySelector('.main-section-banner-dots');
 const headerIcon = document.querySelector(".header-img-icons");
 headerIcon.innerHTML = `
-  <img src="${G_Icons}" alt="IMG" />
+    <img src="${G_Icons}" alt="IMG" />
   `;
 
 const imgBase = [
@@ -41,12 +41,12 @@ const imgBase = [
 ]
 
 
-// Инициализация точки
-function initPointSlider(){
-  imgBase.forEach((img, index) => {
-    parentPoints.innerHTML += `<div class="banner-img-dot ${index === 0 ? 'active': ''}" data-index="${index}"></div>`;
-  })
-}// end Инициализация точки
+// // Инициализация точки
+// function initPointSlider(){
+//   imgBase.forEach((img, index) => {
+//     parentPoints.innerHTML += `<div class="banner-img-dot ${index === 0 ? 'active': ''}" data-index="${index}"></div>`;
+//   })
+// }// end Инициализация точки
 
 // Слайдер главной картинки
 function changeSliderImage(index){
@@ -56,7 +56,7 @@ function changeSliderImage(index){
 }// end Слайдер главной картинки
 
 // Инициализация баннера
-initPointSlider();
+initPointSlider(imgBase, parentPoints);
 
 let index = 0;
 const banner_img = document.querySelector(".banner-img");
@@ -221,11 +221,6 @@ function price(i, categoryShop){
   //console.log('PRICE->', pr);
   return priceDiv;
 }
-
-// // Получение и формирование ID
-// function getBookID(id){
-//   return id;
-// }
 
 
 function getCategoryShopHTML(categoryShop) {
